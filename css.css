@@ -1,0 +1,136 @@
+/* --------- FONT SETUP --------- */
+@font-face {
+  font-family: 'BaronNeue';
+  src: url('font/BaronNeue.eot');
+  src: url('font/BaronNeue.woff2') format('woff2'),
+       url('font/BaronNeue.woff') format('woff'),
+       url('font/BaronNeue.ttf') format('truetype'),
+       url('font/BaronNeue.svg#BaronNeue') format('svg'),
+       url('font/BaronNeue.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ArsenaleWhite';
+  src: url('font/ArsenaleWhite.woff') format('woff'),
+       url('font/ArsenaleWhite.ttf') format('truetype'),
+       url('font/ArsenaleWhite.svg#ArsenaleWhite') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* --------- DOC SETUP --------- */
+html {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background: #ee9ca7;
+    background-repeat: no-repeat;
+    background: -webkit-linear-gradient(#ffdde1, #ee9ca7);
+    background: -moz-linear-gradient(#ffdde1, #ee9ca7);
+    background: -ms-linear-gradient(#ffdde1, #ee9ca7);
+    background: -o-linear-gradient(#ffdde1, #ee9ca7);
+    background: linear-gradient(#ffdde1, #ee9ca7);
+}
+body {
+    text-align: center;
+	color: #fff;
+}
+
+
+/* --------- VERTICAL CENTERING --------- */
+.vertical-center {
+	height: 100%;
+	min-height: 100%;
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+.vertical-center > .container {
+	width: 100%;
+	margin-top: -150px;
+}
+
+
+/* --------- BODY --------- */
+#happyimg {
+    width: 225px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+h1 {
+    font-size: 80px;
+	font-family: 'ArsenaleWhite';
+	font-weight: 100;
+	line-height: 20px;
+}
+#resultwrapper {
+	padding: 0px 10px;
+}
+#result {
+	color: #ff596b;	/*ff6677*/
+	font-family: 'BaronNeue';
+	font-size: 35px;
+	letter-spacing: 4px;
+}
+#complimentor {
+	color: #fff;
+	font-family: 'ArsenaleWhite';
+	font-size: 40px;
+	line-height: 20px;
+    background-color: transparent;
+    width: 200px;
+	height: 40px;
+    border: 0;
+    padding: 0px 5px;
+	cursor: pointer;
+}
+#complimentor:focus {
+    outline: none;
+}
+
+
+/* --------- FOOTER --------- */
+#footer {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	text-align: center;
+}
+#footer p {
+    font-size: 30px;
+	font-family: 'ArsenaleWhite';
+	line-height: 20px;
+}
+#footer a {
+    color: #ff596b;
+    text-decoration: none;
+}
+
+
+/* --------- RESPONSIVE --------- */
+@media screen and (max-width:480px) {
+	.vertical-center > .container {
+		margin-top: -100px;
+	}
+	#happyimg {
+		width: 120px;
+	}
+	h1 {
+		font-size: 65px;
+		font-family: 'ArsenaleWhite';
+		font-weight: 100;
+		line-height: 20px;
+	}
+	#result {
+		font-size: 35px;
+		letter-spacing: 4px;
+	}
+	#footer p {
+		font-size: 25px;
+	}
+}
