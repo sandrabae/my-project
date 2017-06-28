@@ -1,48 +1,54 @@
-
 <html>
-<head>
-	<title>Small Compliments</title>
-	<meta charset="utf-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-    
-    <meta name="description" content="A cute compliment generator to make you smile!"/>
-    <meta name="author" content="Sol Kim"/>
-    <meta name="keywords" content="Compliment, generator, compliments, smile"/>
+   <head>
+      <title>Angular JS Includes</title>
+      
+      <style>
+         table, th , td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+         }
+         
+         table tr:nth-child(odd) {
+            background-color: #f2f2f2;
+         }
+         
+         table tr:nth-child(even) {
+            background-color: #ffffff;
+         }
+      </style>
+      
+   </head>
+   <body>
+      <h2>AngularJS Sample Application</h2>
+      <div ng-app = "" ng-controller = "studentController">
+      
+         <table>
+            <tr>
+               <th>Name</th>
+               <th>Roll No</th>
+               <th>Percentage</th>
+            </tr>
+         
+            <tr ng-repeat = "student in students">
+               <td>{{ student.Name }}</td>
+               <td>{{ student.RollNo }}</td>
+               <td>{{ student.Percentage }}</td>
+            </tr>
+         </table>
+      </div>
+      
+      <script>
+         function studentController($scope,$http) {
+            var url = "data.txt";
 
-    <link rel="stylesheet" href="css.css" type="text/css" media="all"/>
-    <link rel="shortcut icon" href="favicon.ico"/>
-    
-    <script type="text/javascript" src="jquery.min.js"></script>
-    <script type="text/javascript" src="js.js"></script>
-</head>
-
-    
-<body onload="generator()">
-	<div class="vertical-center">
-		<div class="container">
-			<img src="img/happypear1.png" id="happyimg"/>
-	
-			<h1>Keep your head up,</h1>
-
-			<div id="resultwrapper"><p id="result"></p></div>
-			<input type="button" id="complimentor" value="(tell me more!)" onclick="generator();"/>
-		</div>
-		
-		<div id="footer">
-			<p>Check.</p>
-		</div>
-	</div>
-        
-    <!-- Google Analytics -->
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-57651907-1', 'auto');
-        ga('require', 'displayfeatures');
-        ga('send', 'pageview');
-    </script>
-</body>
+            $http.get(url).then( function(response) {
+               $scope.students = response.data;
+            });
+         }
+      </script>
+      
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+      
+   </body>
 </html>
