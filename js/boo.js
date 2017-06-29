@@ -8,8 +8,15 @@ classApp.controller('weatherCtrl', function($scope, $http){
     subheading2: {
       name: "Check out my YouTube Channel",
       link: "http://www.YouTube.com/CodingTutorials360"
-    }
+    },
+
+    scope: {
+      cityName: '@',
+      offsetHours: '@',
+      offsetMinutes: '@'
+  }
   };
+  
   $http.get("https://ip-api.com/json").success(function(data){
   vm.lat= data.lat;
   vm.lon=data.lon;
@@ -28,7 +35,7 @@ vm.cTemp= (vm.temp-273).toFixed(1) + " °C";
 
 
   // Calculate current hour using offset from UTC.
-  vm.datetime = new Date((data.dt*1000)+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
+  vm.datetime = ((data.dt*1000)+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
   vm.sunrise = new Date(data.sys.sunrise*1000+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
   vm.sunset = new Date(data.sys.sunset*1000+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
   vm.currentHour = datetime.getUTCHours();
