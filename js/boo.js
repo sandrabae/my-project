@@ -34,7 +34,6 @@ vm.cTemp= (vm.temp-273).toFixed(1) + " °C";
 
 
   // Calculate current hour using offset from UTC.
-  vm.datetime = new Date(data.dt*1000);
 
 var a = new Date(data.dt * 1000);
 var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -43,13 +42,14 @@ var month = months[a.getMonth()];
 var date = a.getDate();
 
 // Hours part from the timestamp
-var hours = date.getHours();
+var hours = a.getHours();
 // Minutes part from the timestamp
-var minutes = "0" + date.getMinutes();
+var minutes = "0" + a.getMinutes();
 // Seconds part from the timestamp
-var seconds = "0" + date.getSeconds();
+var seconds = "0" + a.getSeconds();
 
-vm.formattedTime = date + ' ' + month + ' ' + year + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+vm.formattedDate = date + ' ' + month + ' ' + year;
+vm.formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
 
 

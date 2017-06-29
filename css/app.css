@@ -80,4 +80,5 @@ transition-timing-function: ease;
 .left {
   margin-right: 10000000px;
   background color: yellow;
+  margin-top: -10px;
 }
