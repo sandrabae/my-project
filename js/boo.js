@@ -32,8 +32,27 @@ vm.cTemp= (vm.temp-273).toFixed(1) + " °C";
   vm.icon= "https://openweathermap.org/img/w/"+ data.weather[0].icon + ".png";
 
 
+
   // Calculate current hour using offset from UTC.
-  vm.datetime = ((data.dt*1000)+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
+  vm.datetime = new Date(data.dt*1000);
+
+var a = new Date(data.dt * 1000);
+var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var year = a.getFullYear();
+var month = months[a.getMonth()];
+var date = a.getDate();
+
+// Hours part from the timestamp
+var hours = date.getHours();
+// Minutes part from the timestamp
+var minutes = "0" + date.getMinutes();
+// Seconds part from the timestamp
+var seconds = "0" + date.getSeconds();
+
+vm.formattedTime = date + ' ' + month + ' ' + year + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+
+
   vm.sunrise = new Date(data.sys.sunrise*1000+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
   vm.sunset = new Date(data.sys.sunset*1000+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
   vm.currentHour = datetime.getUTCHours();
