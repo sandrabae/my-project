@@ -123,7 +123,7 @@ vm.cTemp= (vm.temp-273).toFixed(1) + " °C";
                     }   
                 }
                 else {
-                    switch (res.weather[0].id) {
+                    switch (data.weather[0].description) {
                         case 200:
                         case 201:
                         case 202:
@@ -202,7 +202,7 @@ vm.cTemp= (vm.temp-273).toFixed(1) + " °C";
                     }  
 
                 }
-                switch (res.weather[0].id) {
+                switch (data.weather[0].description) {
                     case 731:
                     case 751:
                     case 761:
