@@ -4,7 +4,7 @@ classApp.controller('weatherCtrl', function($scope, $http){
   var vm = $scope;
   vm. channelInfo = {
     heading:"Open Weather API",
-    subheading1: "Free Code Camp: Front End Projects",
+    subheading1: "PLZ WORK",
     subheading2: {
       name: "Check out my YouTube Channel",
       link: "http://www.YouTube.com/CodingTutorials360"
