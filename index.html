@@ -15,27 +15,12 @@
   {{channelInfo.subheading1}}
   </h2>
     
-  <h3>
-<a ng-href="{{channelInfo.subheading2.link}}" target="blank">
-  {{channelInfo.subheading2.name}}
-       </a>
-  </h3>
 
-  <a class="btn-lg btn-primary">
-  {{description | uppercase}} <img ng-src="{{icon}}"/>
-  </a>
-  <a class="btn-lg btn-primary">
-  {{speed}}
-  </a>
-  <a class="btn-lg btn-primary">
-  {{name}}
-  </a>
-  <a class="btn-lg btn-primary" ng-init="tempVal=true" ng-show="tempVal" ng-click="tempVal=!tempVal">
-  {{fTemp}}
-  </a>
-  <a class="btn-lg btn-primary" ng-show="!tempVal" ng-click="tempVal=!tempVal">
-  {{cTemp}}
-  </a>
+  <a class="btn-lg btn-primary">{{description | uppercase}} <img ng-src="{{icon}}"/></a>
+  <a class="btn-lg btn-primary">{{speed}}</a>
+  <a class="btn-lg btn-primary">{{name}}</a>
+  <a class="btn-lg btn-primary" ng-init="tempVal=true" ng-show="tempVal" ng-click="tempVal=!tempVal">{{fTemp}} </a>
+  <a class="btn-lg btn-primary" ng-show="!tempVal" ng-click="tempVal=!tempVal">{{cTemp}}</a>
 </body>
             <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
  
