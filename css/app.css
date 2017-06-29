@@ -47,3 +47,14 @@ margin-top: 50px;
 size: 110%;
 
 }
+
+.header{
+margin-right: 200px;
+margin-left: 300px;
+margin-top: 50px;
+/*padding: 50px;*/
+font-family: 'Lato';
+display:flex;
+width: 700px;
+
+}
