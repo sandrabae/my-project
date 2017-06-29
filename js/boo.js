@@ -79,8 +79,7 @@ vm.cTemp= (vm.temp-273).toFixed(1) + "  (°C)";
   //       {"background": "url('http://codingtutorials360.com/img/FreeCodeCamp/OpenWeather/sun.jpg')",
   //            "background-size": "cover" };
   //   break;
-      
-  //                      }
+  //       }
   
 });
     
