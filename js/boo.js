@@ -15,12 +15,11 @@ classApp.controller('weatherCtrl', function($scope, $http){
       offsetHours: '@',
       offsetMinutes: '@'
   }
-  };
-$http.get("http://ip-api.com/json").success(function(data){
+  };$http.get("http://ip-api.com/json").success(function(data){
   vm.lat= data.lat;
   vm.lon=data.lon;
  var apiKey=  "d544ef9e2e6f8bd6a4b1d6325950b77e";
- var openWeatherURL = "https://api.openweathermap.org/data/2.5/weather?lat="+ vm.lat + "&lon="+vm.lon+ "&appid=" +apiKey;
+ var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?lat="+ vm.lat + "&lon="+vm.lon+ "&appid=" +apiKey;
     
 $http.get(openWeatherURL).success(function(data){
 vm.description= data.weather[0].description;
