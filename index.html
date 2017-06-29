@@ -1,44 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="utf-8">
-        <title>OpenWeather App</title>
-        <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css"/>
-        <link rel="stylesheet" href="css/app.css"/>
-    </head>
-   <body ng-app="weatherApp" ng-controller="weatherCtrl" class= "text-center info" ng-style="weatherBackground">
-  <h1>
-  {{channelInfo.heading}}
-  </h1>
-  <h2>
-  {{channelInfo.subheading1}}
-  </h2>
-    
-  <h3>
-<a ng-href="{{channelInfo.subheading2.link}}" target="blank">
-  {{channelInfo.subheading2.name}}
-       </a>
-  </h3>
-
-  <a class="btn-lg btn-primary">
-  {{description | uppercase}} <img ng-src="{{icon}}"/>
-  </a>
-  <a class="btn-lg btn-primary">
-  {{speed}}
-  </a>
-  <a class="btn-lg btn-primary">
-  {{name}}
-  </a>
-  <a class="btn-lg btn-primary" ng-init="tempVal=true" ng-show="tempVal" ng-click="tempVal=!tempVal">
-  {{fTemp}}
-  </a>
-  <a class="btn-lg btn-primary" ng-show="!tempVal" ng-click="tempVal=!tempVal">
-  {{cTemp}}
-  </a>
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <title>OpenWeather App</title>
+    <link href="css/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+</head>
+<body class="text-center info">
+    <h1>{{channelInfo.heading}}</h1>
+    <h2>{{channelInfo.subheading1}}</h2>
+    <h3><a target="blank">{{channelInfo.subheading2.name}}</a></h3><a class="btn-lg btn-primary">{{description | uppercase}} <img></a> <a class="btn-lg btn-primary">{{speed}}</a> <a class="btn-lg btn-primary">{{name}}</a> <a class="btn-lg btn-primary">{{fTemp}}</a> <a class="btn-lg btn-primary">{{cTemp}}</a>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js">
+    </script> 
+    <script src="js/boo.js">
+    </script>
 </body>
-            <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
- 
-        <script src="js/boo.js"></script>
-    </body>
 </html>
