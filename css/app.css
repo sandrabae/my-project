@@ -51,9 +51,33 @@ size: 110%;
 .header{
 margin-right: 200px;
 margin-left: 300px;
-margin-bottom: 300px;
+margin-top: -50px;
 font-family: 'Lato';
 display:flex;
 width: 700px;
 
+}
+
+
+.panel{
+
+height: 300px;
+width: 500px;
+margin: .5vw; 
+border-radius: 25px;
+position: relative;
+background-color: yellow;
+margin-left: auto; 
+margin-right: auto;
+
+   transition-property: all;
+transition-duration: 1s;
+transition-timing-function: ease;
+
+
+}
+
+.left {
+  margin-right: 10000000px;
+  background color: yellow;
 }
