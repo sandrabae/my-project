@@ -49,6 +49,7 @@
  <p>{{description | uppercase}} <img ng-src="{{icon}}"/></p>
 
   <a class="btn-lg btn-primary">{{speed}}</a>
+  <a class="btn-lg btn-primary">{{humidity}}</a>
   <a class="btn-lg btn-primary" ng-init="tempVal=true" ng-show="tempVal" ng-click="tempVal=!tempVal">{{fTemp}} </a>
   <a class="btn-lg btn-primary" ng-show="!tempVal" ng-click="tempVal=!tempVal">{{cTemp}}</a>
 </body>
