@@ -29,9 +29,9 @@ vm.cTemp= (vm.temp-273).toFixed(1) + " °C";
 
 
   // Calculate current hour using offset from UTC.
-                var datetime = new Date((res.dt*1000)+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
-                var sunrise = new Date(res.sys.sunrise*1000+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
-                var sunset = new Date(res.sys.sunset*1000+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
+                var datetime = new Date((data.dt*1000)+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
+                var sunrise = new Date(data.sys.sunrise*1000+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
+                var sunset = new Date(data.sys.sunset*1000+(scope.offsetHours*3600000)+(scope.offsetMinutes*60000));
                 var currentHour = datetime.getUTCHours();
                 var sunriseHour = sunrise.getUTCHours();
                 var sunsetHour = sunset.getUTCHours();
