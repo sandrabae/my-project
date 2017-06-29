@@ -123,6 +123,7 @@ vm.cTemp= (vm.temp-273).toFixed(1) + " °C";
                     }   
                 }
                 else {
+                  console.log("are we here?");
                     switch (data.weather[0].description) {
                         case 200:
                         case 201:
