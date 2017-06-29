@@ -2,13 +2,6 @@ var classApp= angular.module('weatherApp', []);
 
 classApp.controller('weatherCtrl', function($scope, $http){
   var vm = $scope;
-  vm. channelInfo = {
-    heading:"Open Weather API",
-    subheading1: "PLZ WORK",
-    subheading2: {
-      name: "Check out my YouTube Channel",
-      link: "http://www.YouTube.com/CodingTutorials360"
-    }
   };
   
   $http.get("http://ip-api.com/json").success(function(data){
