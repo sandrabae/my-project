@@ -2,7 +2,7 @@ var classApp= angular.module('weatherApp', []);
 
 classApp.controller('weatherCtrl', function($scope, $http){
   var vm = $scope;
-  };
+  });
   
   $http.get("http://ip-api.com/json").success(function(data){
   vm.lat= data.lat;
