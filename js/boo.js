@@ -14,7 +14,7 @@ $http.get(openWeatherURL).success(function(data){
 vm.description= data.weather[0].description;
 vm.speed= (2.237*data.wind.speed).toFixed(1) + " mph";
 vm.name= data.name; 
-vm.humidity = data.main.humidity; + " %"
+vm.humidity = data.main.humidity; + " %";
 vm.temp= data.main.temp;
 vm.fTemp= (vm.temp*(9/5)-459.67).toFixed(1) + "  °F";
 vm.cTemp= (vm.temp-273).toFixed(1) + "  °C";
