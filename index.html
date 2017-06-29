@@ -12,7 +12,28 @@
     <body ng-app="weatherApp" ng-controller="weatherCtrl" class= "text-center info" ng-style="weatherBackground">
   
 
- <h3>{{name}}</h3>
+      <div class="weatherDisplay">
+      <div class= "grid2">
+        <div class="left">
+        <img id="currentForcastImage">
+        </div>
+
+        <div class="center">
+          <div id="currentLocation2"></div>
+          <div id="currentForecast"></div>
+          <div id="text1" style="text-align: middle;"></div>
+        </div>
+
+        <div class="right">
+          <div class ="grid2">
+          <img src="../WeatherApp/drop.png"> <div id="humidity"></div><br>
+          <img src="../WeatherApp/wind.png"><div id="wind"></div>
+          </div>
+        </div>
+      </div>
+
+
+ <h3 style="text-align: left;">{{name}}</h3>
  <p>{{description | uppercase}} <img ng-src="{{icon}}"/></p>
   <a class="btn-lg btn-primary">{{speed}}</a>
   <a class="btn-lg btn-primary" ng-init="tempVal=true" ng-show="tempVal" ng-click="tempVal=!tempVal">{{fTemp}} </a>

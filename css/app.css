@@ -32,3 +32,18 @@ body {
 .btn-lg{
   margin:5px;
 }
+
+    .weatherDisplay {
+       display: none;
+    }
+
+        .grid2{
+    	display: none;
+    }
+
+
+    .left img{
+margin-top: 50px;
+size: 110%;
+
+}
