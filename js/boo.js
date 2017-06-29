@@ -80,7 +80,7 @@ vm.cTemp= (vm.temp-273).toFixed(1) + "  (°C)";
   //            "background-size": "cover" };
   //   break;
       
-                       }
+  //                      }
   
 });
     
