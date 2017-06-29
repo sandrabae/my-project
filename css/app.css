@@ -17,3 +17,11 @@ body {
 .weather.panel .panel-footer {
     font-weight: lighter !important;
 }
+
+.info{
+  font-family:'Montserrat'
+}
+
+.btn-lg{
+  margin:5px;
+}
