@@ -12,7 +12,7 @@
     <body ng-app="weatherApp" ng-controller="weatherCtrl" class= "text-center info" ng-style="weatherBackground">
   
 
- <p>{{description | uppercase}} <img ng-src="{{icon}}"/></p>
+ <h3>{{description | uppercase}} <img ng-src="{{icon}}"/></h3>
   <a class="btn-lg btn-primary">{{speed}}</a>
   <a class="btn-lg btn-primary">{{name}}</a>
   <a class="btn-lg btn-primary" ng-init="tempVal=true" ng-show="tempVal" ng-click="tempVal=!tempVal">{{fTemp}} </a>
