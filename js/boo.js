@@ -10,7 +10,7 @@ classApp.controller('weatherCtrl', function($scope, $http){
       link: "http://www.YouTube.com/CodingTutorials360"
     }
   };
-  $http.get("http://ip-api.com/json").success(function(data){
+  $http.get("https://ip-api.com/json").success(function(data){
   vm.lat= data.lat;
   vm.lon=data.lon;
  var apiKey=  "d544ef9e2e6f8bd6a4b1d6325950b77e";
