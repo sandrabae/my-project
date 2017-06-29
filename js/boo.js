@@ -2,7 +2,14 @@ var classApp= angular.module('weatherApp', []);
 
 classApp.controller('weatherCtrl', function($scope, $http){
   var vm = $scope;
-  }
+  vm. channelInfo = {
+    heading:"Open Weather API",
+    subheading1: "Free Code Camp: Front End Projects",
+    subheading2: {
+      name: "Check out my YouTube Channel",
+      link: "http://www.YouTube.com/CodingTutorials360"
+    }
+  };
   
   $http.get("http://ip-api.com/json").success(function(data){
   vm.lat= data.lat;
@@ -16,8 +23,8 @@ vm.speed= (2.237*data.wind.speed).toFixed(1) + " mph";
 vm.name= data.name; 
 vm.humidity = data.main.humidity + " %";
 vm.temp= data.main.temp;
-vm.fTemp= (vm.temp*(9/5)-459.67).toFixed(1) + "  °F";
-vm.cTemp= (vm.temp-273).toFixed(1) + "  °C";
+vm.fTemp= (vm.temp*(9/5)-459.67).toFixed(1) + "  (°F)";
+vm.cTemp= (vm.temp-273).toFixed(1) + "  (°C)";
   vm.icon= "http://openweathermap.org/img/w/"+ data.weather[0].icon + ".png";
   
   // switch(vm.description){
@@ -73,9 +80,11 @@ vm.cTemp= (vm.temp-273).toFixed(1) + "  °C";
   //       {"background": "url('http://codingtutorials360.com/img/FreeCodeCamp/OpenWeather/sun.jpg')",
   //            "background-size": "cover" };
   //   break;
-  //       }
+      
+  //                      }
   
 });
     
   });
 });
+
