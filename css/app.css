@@ -6,6 +6,12 @@ body {
     background-color: #FAFAFA;
 }
 
+.p{
+
+	font-family: 'Montserrat';
+	font-weight: 500;
+}
+
 .weather.panel {
     /*font-weight: lighter !important;*/
 }
