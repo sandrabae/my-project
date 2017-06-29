@@ -14,7 +14,7 @@ classApp.controller('weatherCtrl', function($scope, $http){
   $http.get("http://ip-api.com/json").success(function(data){
   vm.lat= data.lat;
   vm.lon=data.lon;
- var apiKey=  "b86d21440d8c9a110912a2eb0845abb4";
+ var apiKey=  "d544ef9e2e6f8bd6a4b1d6325950b77e";
  var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?lat="+ vm.lat + "&lon="+vm.lon+ "&appid=" +apiKey;
     
 $http.get(openWeatherURL).success(function(data){
