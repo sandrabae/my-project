@@ -14,7 +14,7 @@ classApp.controller('weatherCtrl', function($scope, $http){
   vm.lat= data.lat;
   vm.lon=data.lon;
  var apiKey=  "d544ef9e2e6f8bd6a4b1d6325950b77e";
- var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?lat="+ vm.lat + "&lon="+vm.lon+ "&appid=" +apiKey;
+ var openWeatherURL = "https://api.openweathermap.org/data/2.5/weather?lat="+ vm.lat + "&lon="+vm.lon+ "&appid=" +apiKey;
     
 $http.get(openWeatherURL).success(function(data){
 vm.description= data.weather[0].description;
@@ -24,7 +24,7 @@ vm.humidity = data.main.humidity + " %";
 vm.temp= data.main.temp;
 vm.fTemp= (vm.temp*(9/5)-459.67).toFixed(1) + " °F";
 vm.cTemp= (vm.temp-273).toFixed(1) + " °C";
-  vm.icon= "http://openweathermap.org/img/w/"+ data.weather[0].icon + ".png";
+  vm.icon= "https://openweathermap.org/img/w/"+ data.weather[0].icon + ".png";
 
 
   // Calculate current hour using offset from UTC.
