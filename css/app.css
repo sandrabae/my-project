@@ -51,7 +51,7 @@ size: 110%;
 .header{
 margin-right: 200px;
 margin-left: 300px;
-/*padding: 50px;*/
+margin-bottom: 300px;
 font-family: 'Lato';
 display:flex;
 width: 700px;
