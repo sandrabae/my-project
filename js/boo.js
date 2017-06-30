@@ -7,33 +7,12 @@ classApp.controller('weatherCtrl', function($scope, $http) {
   $http.get("http://ip-api.com/json").success(function(data) {
     vm.zip = data.zip;
     vm.lat = data.lat;
-    vm.lon = data.lon;
-
-    $scope.getForecastByLocation = function(myName) {
-    //console.log("hellooooooooo");
-    // alert("This is an example of ng-click");
-    vm.zip = myName;
-    console.log("this");
-
-    var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
-    var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + vm.zip + ",us" + "&appid=" + apiKey;
-
-    console.log(url);
-    return vm.zip;
-    };
+    vm.lon = data.lon
 
 
     var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
     var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?zip=" + vm.zip + ",us" + "&appid=" + apiKey;
     
-    $scope.getForecastByLocation();
-
-    // Set $scope.location and execute search on API
-    vm.setLocation = function(loc) {
-      $scope.location = loc;
-      $scope.getForecastByLocation();
-    };
-
 
     $http.get(openWeatherURL).success(function(data) {
       vm.description = data.weather[0].description;
@@ -161,6 +140,34 @@ classApp.controller('weatherCtrl', function($scope, $http) {
       vm.sunsetHour = sunset.getUTCHours();
 
     }); //closing OpenWeatherMap
+
+  
+      $scope.getForecastByLocation = function(myName) {
+      
+      vm.zip = myName;
+      console.log("this");
+
+      var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
+      var updtedUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + vm.zip + ",us" + "&appid=" + apiKey;
+
+    
+      //};//getForecastByLocation
+
+      $http.get().success(function(data) {
+
+      vm.description = data.weather[0].description;
+      vm.speed = (2.237 * data.wind.speed).toFixed(1) + " mph";
+      vm.name = data.name;
+      vm.humidity = data.main.humidity + " %";
+      vm.temp = data.main.temp;
+      vm.fTemp = (vm.temp * (9 / 5) - 459.67).toFixed(1) + " °F";
+      vm.cTemp = (vm.temp - 273).toFixed(1) + " °C";
+      vm.icon = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+      });
+
+
+      };
+
 
   }); //closing IP-API
 
