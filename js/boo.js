@@ -18,7 +18,11 @@ classApp.controller('weatherCtrl', function($scope, $http){
   };
 
 
-
+  // var night = 1
+  // if (night = 1){
+  // $scope.weatherClass= "wi wi-owm-905";
+  // }
+  
   $http.get("http://ip-api.com/json").success(function(data){
   vm.lat= data.lat;
   vm.lon=data.lon;
@@ -34,6 +38,86 @@ vm.temp= data.main.temp;
 vm.fTemp= (vm.temp*(9/5)-459.67).toFixed(1) + " °F";
 vm.cTemp= (vm.temp-273).toFixed(1) + " °C";
   vm.icon= "https://openweathermap.org/img/w/"+ data.weather[0].icon + ".png";
+
+
+if(data.weather[0].id >= 200 && data.weather[0].id < 300){
+    $scope.weatherClass= "wi wi-thunderstorm";
+  }
+  
+  if(data.weather[0].id >= 300 && data.weather[0].id < 400){
+     $scope.weatherClass= "wi wi-sprinkle";
+  }
+  
+  if(data.weather[0].id >= 500 && data.weather[0].id < 600){
+    if(data.weather[0].id == 500 || data.weather[0].id >= 520){
+       $scope.weatherClass= "wi wi-rain";
+    }
+     $scope.weatherClass= "wi wi-showers";
+  }
+  
+  if(data.weather[0].id >= 600 && data.weather[0].id < 700){
+    $scope.weatherClass= "wi wi-snow";
+  }
+  
+  if(data.weather[0].id >= 700 && data.weather[0].id < 800){
+     $scope.weatherClass= "wi wi-fog";
+  }
+  
+  if(data.weather[0].id == 800){
+     $scope.weatherClass= "wi wi-day-sunny";
+  }
+  
+  if(data.weather[0].id == 801){
+     $scope.weatherClass= "wi wi-day-sunny-overcast";
+  }
+  
+  if(data.weather[0].id == 802){
+     $scope.weatherClass= "wi wi-day-cloudy";
+  }
+  
+  if(data.weather[0].id == 803 || data.weather[0].id == 804){
+    $scope.weatherClass= "wi wi-cloudy";
+  }
+  
+  if(data.weather[0].id == 900){
+     $scope.weatherClass= "wi wi-tornado";
+  }
+  
+  if(data.weather[0].id == 901 || data.weather[0].id == 960 || data.weather[0].id == 961){
+     $scope.weatherClass= "wi wi-thunderstorm";
+  }
+  
+  if(data.weather[0].id == 902 || data.weather[0].id == 962){
+     $scope.weatherClass= "wi wi-hurricane";
+  }
+  
+  if(data.weather[0].id == 903){
+    $scope.weatherClass= "wi wi-snowflake-cold";
+  }
+  
+  if(data.weather[0].id == 904){
+     $scope.weatherClass= "wi wi-hot";
+  }
+  
+  if(data.weather[0].id == 905){
+     $scope.weatherClass= "wi wi-strong-wind";
+  }
+  
+  if(data.weather[0].id == 906){
+     $scope.weatherClass= "wi wi-hail";
+  }
+  
+  if(data.weather[0].id == 951){
+      $scope.weatherClass= "wi wi-day-sunny";
+  }
+  
+  if(data.weather[0].id >= 952 && data.weather[0].id <= 956){
+    $scope.weatherClass= "wi wi-windy";
+  }
+  
+  if(data.weather[0].id >= 957 && data.weather[0].id <= 959){
+     $scope.weatherClass= "wi wi-strong-wind";
+  }
 
 
 
@@ -60,92 +144,91 @@ vm.sunset = new Date(data.sys.sunset*1000+(scope.offsetHours*3600000)+(scope.off
 vm.currentHour = datetime.getUTCHours();
 vm.sunriseHour = sunrise.getUTCHours();
 vm.sunsetHour = sunset.getUTCHours();
-vm.weatherClass= "wi wi-owm-731";
+// $scope.weatherClass= "wi wi-owm-731";
     
-// Hour between sunset and sunrise being night time
-var night = false;
-vm.weatherClass2 =  $("#icon").attr("class", " wi wi-showers");
-getIcon();
-        //function that gets icon based on description
+//function that gets icon based on description
 
-          // if(data.weather[0].id >= 200 && data.weather[0].id < 300){
-          //   $("#icon").attr("class", " wi wi-thunderstorm");
-          // }
-          
-          // if(data.weather[0].id >= 300 && data.weather[0].id < 400){
-          //   $("#icon").attr("class", " wi wi-sprinkle");
-          // }
-          
-          // if(data.weather[0].id >= 500 && data.weather[0].id < 600){
-          //   if(data.weather[0].id == 500 || data.weather[0].id >= 520){
-          //     $("#icon").attr("class", "wi wi-rain")
-          //   }
-          //   $("#icon").attr("class", " wi wi-showers");
-          // }
-          
-          // if(data.weather[0].id >= 600 && data.weather[0].id < 700){
-          //   $("#icon").attr("class", " wi wi-snow");
-          // }
-          
-          // if(data.weather[0].id >= 700 && data.weather[0].id < 800){
-          //   $("#icon").attr("class", " wi wi-fog");
-          // }
-          
-          // if(data.weather[0].id == 800){
-          //   $("#icon").attr("class", " wi wi-day-sunny");
-          // }
-          
-          // if(data.weather[0].id == 801){
-          //   $("#icon").attr("class", " wi wi-day-sunny-overcast");
-          // }
-          
-          // if(data.weather[0].id == 802){
-          //   $("#icon").attr("class", " wi wi-day-cloudy");
-          // }
-          
-          // if(data.weather[0].id == 803 || data.weather[0].id == 804){
-          //   $("#icon").attr("class", " wi wi-cloudy");
-          // }
-          
-          // if(data.weather[0].id == 900){
-          //   $("#icon").attr("class", " wi wi-tornado");
-          // }
-          
-          // if(data.weather[0].id == 901 || data.weather[0].id == 960 || data.weather[0].id == 961){
-          //   $("#icon").attr("class", " wi wi-thunderstorm");
-          // }
-          
-          // if(data.weather[0].id == 902 || data.weather[0].id == 962){
-          //   $("#icon").attr("class", " wi wi-hurricane");
-          // }
-          
-          // if(data.weather[0].id == 903){
-          //   $("#icon").attr("class", " wi wi-snowflake-cold");
-          // }
-          
-          // if(data.weather[0].id == 904){
-          //   $("#icon").attr("class", " wi wi-hot");
-          // }
-          
-          // if(data.weather[0].id == 905){
-          //   $("#icon").attr("class", " wi wi-strong-wind");
-          // }
-          
-          // if(data.weather[0].id == 906){
-          //   $("#icon").attr("class", " wi wi-hail");
-          // }
-          
-          // if(data.weather[0].id == 951){
-          //   $("#icon").attr("class", "wi wi-day-sunny");
-          // }
-          
-          // if(data.weather[0].id >= 952 && data.weather[0].id <= 956){
-          //   $("#icon").attr("class", "wi wi-windy");
-          // }
-          
-          // if(data.weather[0].id >= 957 && data.weather[0].id <= 959){
-          //   $("#icon").attr("class", "wi wi-strong-wind");
-          // }
+
+
+
+  // if(data.weather[0].id >= 200 && data.weather[0].id < 300){
+  //   $("#icon").attr("class", " wi wi-thunderstorm");
+  // }
+  
+  // if(data.weather[0].id >= 300 && data.weather[0].id < 400){
+  //   $("#icon").attr("class", " wi wi-sprinkle");
+  // }
+  
+  // if(data.weather[0].id >= 500 && data.weather[0].id < 600){
+  //   if(data.weather[0].id == 500 || data.weather[0].id >= 520){
+  //     $("#icon").attr("class", "wi wi-rain")
+  //   }
+  //   $("#icon").attr("class", " wi wi-showers");
+  // }
+  
+  // if(data.weather[0].id >= 600 && data.weather[0].id < 700){
+  //   $("#icon").attr("class", " wi wi-snow");
+  // }
+  
+  // if(data.weather[0].id >= 700 && data.weather[0].id < 800){
+  //   $("#icon").attr("class", " wi wi-fog");
+  // }
+  
+  // if(data.weather[0].id == 800){
+  //   $("#icon").attr("class", " wi wi-day-sunny");
+  // }
+  
+  // if(data.weather[0].id == 801){
+  //   $("#icon").attr("class", " wi wi-day-sunny-overcast");
+  // }
+  
+  // if(data.weather[0].id == 802){
+  //   $("#icon").attr("class", " wi wi-day-cloudy");
+  // }
+  
+  // if(data.weather[0].id == 803 || data.weather[0].id == 804){
+  //   $("#icon").attr("class", " wi wi-cloudy");
+  // }
+  
+  // if(data.weather[0].id == 900){
+  //   $("#icon").attr("class", " wi wi-tornado");
+  // }
+  
+  // if(data.weather[0].id == 901 || data.weather[0].id == 960 || data.weather[0].id == 961){
+  //   $("#icon").attr("class", " wi wi-thunderstorm");
+  // }
+  
+  // if(data.weather[0].id == 902 || data.weather[0].id == 962){
+  //   $("#icon").attr("class", " wi wi-hurricane");
+  // }
+  
+  // if(data.weather[0].id == 903){
+  //   $("#icon").attr("class", " wi wi-snowflake-cold");
+  // }
+  
+  // if(data.weather[0].id == 904){
+  //   $("#icon").attr("class", " wi wi-hot");
+  // }
+  
+  // if(data.weather[0].id == 905){
+  //   $("#icon").attr("class", " wi wi-strong-wind");
+  // }
+  
+  // if(data.weather[0].id == 906){
+  //   $("#icon").attr("class", " wi wi-hail");
+  // }
+  
+  // if(data.weather[0].id == 951){
+  //   $("#icon").attr("class", "wi wi-day-sunny");
+  // }
+  
+  // if(data.weather[0].id >= 952 && data.weather[0].id <= 956){
+  //   $("#icon").attr("class", "wi wi-windy");
+  // }
+  
+  // if(data.weather[0].id >= 957 && data.weather[0].id <= 959){
+  //   $("#icon").attr("class", "wi wi-strong-wind");
+  // }
           
         
 
