@@ -39,23 +39,23 @@
         <i ng-class="weatherClass" style="font-size:100px; margin-top: -10px; color: #FAFAFA;"></i>
         <h3 style="text-align: center; font-size: 60px;  margin-top: 15px; color: #FAFAFA; ">{{fTemp | uppercase}}</h3>
         <p style="color: #FAFAFA;">{{description | uppercase}}</p>
-        <p style="color: #FAFAFA;">{{location}}</p><br>
+        <p>{{location}}</p><br>
        
             <div id="wrapper">
               <div id="first">
-                <i class= "wi wi-horizon-alt" style="font-size: 20px; color: #FAFAFA;"></i>
+                <i id="smallIcons" class= "wi wi-horizon-alt"></i>
                 <p id="eventID">SUNRISE</p>
-                <p style="margin-top: -10px;color: #FAFAFA;">{{formattedSunrise}}</p>
+                <p id="subID"">{{formattedSunrise}}</p>
               </div>
               <div id="second">
-                <i class= "wi wi-strong-wind" style="font-size: 20px; color: #FAFAFA;"></i>
+                <i class= "wi wi-strong-wind" id="smallIcons"></i>
                 <p id="eventID">WIND</p>
-                <p style="margin-top: -10px;color: #FAFAFA;">{{speed}}</p>
+                <p id="subID">{{speed}}</p>
               </div>
               <div id="third">
-                <i class= "wi wi-humidity" style="font-size: 20px; color: #FAFAFA;"></i>
+                <i class= "wi wi-humidity" id="smallIcons"></i>
                 <p id="eventID">HUMIDITY</p>
-                <p style="margin-top: -10px;color: #FAFAFA;">{{humidity}}</p>
+                <p id="subID">{{humidity}}</p>
               </div>
         </div>
 

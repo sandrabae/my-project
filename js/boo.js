@@ -3,6 +3,13 @@ var classApp = angular.module('weatherApp', []);
 classApp.controller('weatherCtrl', function($scope, $http) {
   var vm = $scope;
 
+  $scope.event = [
+            {"id": 0, "name": "SUNRISE"},
+            {"id": 1, "name": "WIND"},
+            {"id": 2, "name": "HUMIDITY"}
+  ];
+
+
   $http.get("http://ip-api.com/json").success(function(data) {
     vm.zip = data.zip;
     vm.lat = data.lat;

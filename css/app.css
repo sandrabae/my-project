@@ -50,6 +50,14 @@
 		margin-right: auto;
 		background-color: #8EBCBB;
 	}
+	#smallIcons{
+		font-size: 20px; 
+		color: #FAFAFA;
+	}
+	#subID{
+		margin-top: -10px;
+		color: #FAFAFA;
+	}
 	#eventID {
 		margin-top: 5px;
 		font-size: 10px;
