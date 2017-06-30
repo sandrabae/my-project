@@ -22,10 +22,6 @@ classApp.controller('weatherCtrl', function($scope, $http) {
       vm.fTemp = (vm.temp * (9 / 5) - 459.67).toFixed(1) + " °F";
       vm.cTemp = (vm.temp - 273).toFixed(1) + " °C";
       vm.icon = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
-  
-    // };
-
-
 
       //Getting the weather icon
       if (data.weather[0].id >= 200 && data.weather[0].id < 300) {
@@ -280,13 +276,6 @@ classApp.controller('weatherCtrl', function($scope, $http) {
 
       vm.formattedSunrise = sunriseHours + ':' + sunriseMinutes.substr(-2) + ':' + sunriseSeconds.substr(-2);
       
-      // vm.sunrise = new Date(data.sys.sunrise * 1000 + (scope.offsetHours * 3600000) + (scope.offsetMinutes * 60000));
-      //vm.su = new Date(data.sys.sunset * 1000 + (scope.offsetHours * 3600000) + (scope.offsetMinutes * 60000));
-
-
-      vm.currentHour = datetime.getUTCHours();
-      vm.sunriseHour = sunrise.getUTCHours();
-      vm.sunsetHour = sunset.getUTCHours();
 
       });//end of GET request of updatedURL
 
