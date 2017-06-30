@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <title>OpenWeather App</title>
          <link href='https://fonts.googleapis.com/css?family=Montserrat:300,400,700' rel='stylesheet' type='text/css'>
+         <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/weather-icons.min.css">
         <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" href="css/app.css"/>
@@ -30,19 +31,42 @@
 
 
 <br><br>
-
+  
 
     <div class="panel">
-        <h3 style="font-size: 25px; margin-right: 275px; margin-top: 35px">{{name | uppercase}}</h3><br>
+        <h3 style="font-size: 25px; margin-right: 275px; margin-top: 35px; color: #FAFAFA;">{{name | uppercase}}</h3><br>
 
-        <i ng-class="weatherClass" style="font-size:100px; margin-top: -10px;"></i>
-        <h3 style="text-align: center; font-size: 60px;  margin-top: 15px; ">{{fTemp | uppercase}}</h3>
-        <p>{{description | uppercase}} <img ng-src="{{icon}}"/></p>
-        <p>{{location}}</p>
-        <a class="btn-lg btn-primary">{{speed}} </a>
+        <i ng-class="weatherClass" style="font-size:100px; margin-top: -10px; color: #FAFAFA;"></i>
+        <h3 style="text-align: center; font-size: 60px;  margin-top: 15px; color: #FAFAFA; ">{{fTemp | uppercase}}</h3>
+        <p style="color: #FAFAFA;">{{description | uppercase}}</p>
+        <p style="color: #FAFAFA;">{{location}}</p><br>
+       
+            <div id="wrapper">
+              <div id="first">
+                <i class= "wi wi-horizon-alt" style="font-size: 20px; color: #FAFAFA;"></i>
+                <p id="eventID">SUNRISE</p>
+                <p style="margin-top: -10px;color: #FAFAFA;">{{formattedSunrise}}</p>
+              </div>
+              <div id="second">
+                <i class= "wi wi-strong-wind" style="font-size: 20px; color: #FAFAFA;"></i>
+                <p id="eventID">WIND</p>
+                <p style="margin-top: -10px;color: #FAFAFA;">{{speed}}</p>
+              </div>
+              <div id="third">
+                <i class= "wi wi-humidity" style="font-size: 20px; color: #FAFAFA;"></i>
+                <p id="eventID">HUMIDITY</p>
+                <p style="margin-top: -10px;color: #FAFAFA;">{{humidity}}</p>
+              </div>
+        </div>
+
+<!--         <a class="btn-lg btn-primary">{{speed}} </a>
+       
         <a class="btn-lg btn-primary">{{humidity}}</a>
-
-    </div>
+        <p>hi</p>
+        <a class="btn-lg btn-primary">{{humidity}}</a>
+        <p>hi</p> -->
+<!-- <img ng-src="{{icon}}"/> -->
+    </div> <!-- End of panel -->
         
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
         <script src="js/boo.js"></script>

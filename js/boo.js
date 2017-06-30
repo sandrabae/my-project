@@ -126,7 +126,20 @@ classApp.controller('weatherCtrl', function($scope, $http) {
       vm.formattedDate = date + ' ' + month + ' ' + year;
       vm.formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
-      vm.sunrise = new Date(data.sys.sunrise * 1000 + (scope.offsetHours * 3600000) + (scope.offsetMinutes * 60000));
+      var sunrise = new Date(data.sys.sunrise*1000);
+
+      console.log("hey did you reach me?");
+      var sunriseHours = sunrise.getHours();
+      // Minutes part from the timestamp
+      var sunriseMinutes = "0" + sunrise.getMinutes();
+      // Seconds part from the timestamp
+     
+
+
+      vm.formattedSunrise = sunriseHours + ':' + sunriseMinutes.substr(-2) + ' AM';
+      
+
+      //vm.sunrise = new Date(data.sys.sunrise * 1000 + (scope.offsetHours * 3600000) + (scope.offsetMinutes * 60000));
       vm.sunset = new Date(data.sys.sunset * 1000 + (scope.offsetHours * 3600000) + (scope.offsetMinutes * 60000));
       vm.currentHour = datetime.getUTCHours();
       vm.sunriseHour = sunrise.getUTCHours();
@@ -256,8 +269,21 @@ classApp.controller('weatherCtrl', function($scope, $http) {
       vm.formattedDate = date + ' ' + month + ' ' + year;
       vm.formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
-      vm.sunrise = new Date(data.sys.sunrise * 1000 + (scope.offsetHours * 3600000) + (scope.offsetMinutes * 60000));
-      vm.sunset = new Date(data.sys.sunset * 1000 + (scope.offsetHours * 3600000) + (scope.offsetMinutes * 60000));
+      vm.sunrise = new Date(data.sys.sunrise*1000);
+      console.log("hey did you reach me?");
+      var sunriseHours = sunrise.getHours();
+      // Minutes part from the timestamp
+      var sunriseMinutes = "0" + sunrise.getMinutes();
+      // Seconds part from the timestamp
+      var sunriseSeconds = "0" + sunrise.getSeconds();
+
+
+      vm.formattedSunrise = sunriseHours + ':' + sunriseMinutes.substr(-2) + ':' + sunriseSeconds.substr(-2);
+      
+      // vm.sunrise = new Date(data.sys.sunrise * 1000 + (scope.offsetHours * 3600000) + (scope.offsetMinutes * 60000));
+      //vm.su = new Date(data.sys.sunset * 1000 + (scope.offsetHours * 3600000) + (scope.offsetMinutes * 60000));
+
+
       vm.currentHour = datetime.getUTCHours();
       vm.sunriseHour = sunrise.getUTCHours();
       vm.sunsetHour = sunset.getUTCHours();

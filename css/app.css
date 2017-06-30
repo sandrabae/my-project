@@ -6,10 +6,18 @@ body {
     background-color: #FAFAFA;
 }
 
-.p, h3{
+.p{
 
 	font-family: 'Montserrat';
 	font-weight: 500;
+	color: #FAFAFA;
+}
+
+h3{
+
+	font-family: 'Montserrat';
+	font-weight: 500;
+
 }
 
 .weather.panel {
@@ -61,24 +69,59 @@ width: 700px;
 
 .panel{
 margin-top: -30px;
-height: 385px;
+height: 400px;
 width: 500px;
 margin: .5vw; 
 border-radius: 25px;
 position: relative;
-background-color: yellow;
 margin-left: auto; 
 margin-right: auto;
-
-   transition-property: all;
-transition-duration: 1s;
-transition-timing-function: ease;
+background-color: #8EBCBB;
 
 
 }
 
-.left {
-  margin-right: 10000000px;
+.panel-left div {
+  display: inline-block;
   background color: yellow;
   margin-top: -10px;
+}
+
+.panel-center div {
+  display: inline-block;
+  background color: yellow;
+  margin-top: -10px;
+}
+
+.panel-right div {
+  display: inline-block;
+  background color: yellow;
+  margin-top: -10px;
+}
+
+#eventID{
+	margin-top: 5px;
+	font-size: 10px;
+	font-family: 'Lato';
+	color: #FAFAFA;
+}
+
+#wrapper {
+    width:500;
+    clear:both;
+}
+#first {
+    
+    width:166px;
+    float:left;
+}
+#second {
+   
+    width:166px;
+    float:left;
+}
+#third {
+  
+    width:166px;
+    float:left;
 }
