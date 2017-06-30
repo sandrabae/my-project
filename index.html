@@ -34,13 +34,20 @@
 
   <div class="panel">
 <h3 style="font-size: 25px; margin-right: 275px; margin-top: 35px">{{name | uppercase}}</h3><br>
-<i class="wi wi-night-sleet"></i>
-<i class="wi" ng-class="weatherClass" style="padding-right:5px;"></i>
-<h3 style="text-align: center; margin-top: 30px; font-size: 60px;">{{fTemp | uppercase}}</h3>
+<i id="weatherClass2"></i>
+<i class="wi wi-owm-731" style="font-size: 75px"></i>
+<i class="wi wi-owm-731" style="font-size: 75px"></i>
+<i ngClass="weatherClass"></i>
+<i class="weatherClass" style="font-size: 75px"></i>
+<i id="icon"></i>
+<p>{{weatherClass}}</p>
+<i ng-src="{{weatherClass}}" style="font-size: 75px"></i>
+<i ng-class="weatherClass" style="padding-right:5px;"></i>
+<h3 style="text-align: center; font-size: 60px;  margin-top: -120px;">{{fTemp | uppercase}}</h3>
  <p>{{description | uppercase}} <img ng-src="{{icon}}"/></p>
 
-  <a class="btn-lg btn-primary">{{speed}}</a>
-  <a class="btn-lg btn-primary">{{humidity}}</a>
+  <a class="btn-lg btn-primary">{{speed}} <i class="wi wi-owm-731"></i></a>
+  <a class="btn-lg btn-primary">{{humidity}} <i class="wi wi-owm-731"></a>
 
   </div>
         
