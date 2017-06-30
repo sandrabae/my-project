@@ -11,13 +11,10 @@ classApp.controller('weatherCtrl', function($scope, $http) {
 
 
   $http.get("http://ip-api.com/json").success(function(data) {
-    vm.zip = data.zip;
-    vm.lat = data.lat;
-    vm.lon = data.lon
-
+    vm.city = data.city;
 
     var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
-    var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?zip=" + vm.zip + ",us" + "&appid=" + apiKey;
+    var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + vm.city + ",us" + "&appid=" + apiKey;
     
 
     $http.get(openWeatherURL).success(function(data) {
@@ -127,37 +124,28 @@ classApp.controller('weatherCtrl', function($scope, $http) {
       var seconds = "0" + a.getSeconds();
 
       vm.formattedDate = date + ' ' + month + ' ' + year;
-      vm.formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+      vm.formattedTime = hours + ':' + minutes.substr(-2);
 
+
+      //Formatted time for sunrise
       var sunrise = new Date(data.sys.sunrise*1000);
-
-      console.log("hey did you reach me?");
       var sunriseHours = sunrise.getHours();
-      // Minutes part from the timestamp
       var sunriseMinutes = "0" + sunrise.getMinutes();
-      // Seconds part from the timestamp
-     
-
-
+    
       vm.formattedSunrise = sunriseHours + ':' + sunriseMinutes.substr(-2) + ' AM';
       
-
-      //vm.sunrise = new Date(data.sys.sunrise * 1000 + (scope.offsetHours * 3600000) + (scope.offsetMinutes * 60000));
-      vm.sunset = new Date(data.sys.sunset * 1000 + (scope.offsetHours * 3600000) + (scope.offsetMinutes * 60000));
-      vm.currentHour = datetime.getUTCHours();
-      vm.sunriseHour = sunrise.getUTCHours();
-      vm.sunsetHour = sunset.getUTCHours();
 
     }); //closing OpenWeatherMap
 
 
     $scope.getForecastByLocation = function(myName) {
     
-    vm.zip = myName;
+    vm.city = myName;
     console.log("this");
 
     var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
-    var updatedURL = "http://api.openweathermap.org/data/2.5/weather?zip=" + vm.zip + ",us" + "&appid=" + apiKey;
+   
+    var updatedURL = "http://api.openweathermap.org/data/2.5/weather?q=" + vm.city + ",us" + "&appid=" + apiKey;
 
 
       $http.get(updatedURL).success(function(data) {
@@ -270,7 +258,7 @@ classApp.controller('weatherCtrl', function($scope, $http) {
       var seconds = "0" + a.getSeconds();
 
       vm.formattedDate = date + ' ' + month + ' ' + year;
-      vm.formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+      vm.formattedTime = hours + ':' + minutes.substr(-2);
 
       vm.sunrise = new Date(data.sys.sunrise*1000);
       console.log("hey did you reach me?");
