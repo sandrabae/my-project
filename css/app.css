@@ -50,21 +50,6 @@
 		margin-right: auto;
 		background-color: #8EBCBB;
 	}
-	.panel-left div {
-		display: inline-block;
-		background color: yellow;
-		margin-top: -10px;
-	}
-	.panel-center div {
-		display: inline-block;
-		background color: yellow;
-		margin-top: -10px;
-	}
-	.panel-right div {
-		display: inline-block;
-		background color: yellow;
-		margin-top: -10px;
-	}
 	#eventID {
 		margin-top: 5px;
 		font-size: 10px;
