@@ -1,128 +1,98 @@
 /* app css stylesheet */
 
 body {
-    padding-top: 80px;
-    padding-bottom: 180px;
-    background-color: #FAFAFA;
+	padding-top: 80px;
+	padding-bottom: 180px;
+	background-color: #FAFAFA;
 }
-
-.p{
-
+.p {
 	font-family: 'Montserrat';
 	font-weight: 500;
 	color: #FAFAFA;
 }
-
-h3{
-
+h3 {
 	font-family: 'Montserrat';
 	font-weight: 500;
-
 }
-
 .weather.panel {
-    /*font-weight: lighter !important;*/
+	/*font-weight: lighter !important;*/
 }
-
 .weather.panel .panel-heading {
-    font-weight: lighter !important;
-    font-size: 1.2em;
+	font-weight: lighter !important;
+	font-size: 1.2em;
 }
-
 .weather.panel .panel-footer {
-    font-weight: lighter !important;
+	font-weight: lighter !important;
 }
-
-.info{
-  font-family:'Montserrat'
+.info {
+	font-family: 'Montserrat'
 }
-
-.btn-lg{
-  margin:5px;
+.btn-lg {
+	margin: 5px;
 }
-
-    .weatherDisplay {
-       display: none;
-    }
-
-        .grid2{
-    	display: none;
-    }
-
-
-    .left img{
-margin-top: 50px;
-size: 110%;
-
+.weatherDisplay {
+	display: none;
 }
-
-.header{
-margin-right: 200px;
-margin-left: 300px;
-margin-top: -70px;
-font-family: 'Lato';
-display:flex;
-width: 700px;
-
+.grid2 {
+	display: none;
 }
-
-
-.panel{
-margin-top: -30px;
-height: 400px;
-width: 500px;
-margin: .5vw; 
-border-radius: 25px;
-position: relative;
-margin-left: auto; 
-margin-right: auto;
-
-background-color: #8EBCBB;
-
-
+.left img {
+	margin-top: 50px;
+	size: 110%;
 }
-
+.header {
+	margin-right: 200px;
+	margin-left: 300px;
+	margin-top: -70px;
+	font-family: 'Lato';
+	display: flex;
+	width: 700px;
+}
+.panel {
+	margin-top: -30px;
+	height: 400px;
+	width: 500px;
+	margin: .5vw;
+	border-radius: 25px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #8EBCBB;
+}
 .panel-left div {
-  display: inline-block;
-  background color: yellow;
-  margin-top: -10px;
+	display: inline-block;
+	background color: yellow;
+	margin-top: -10px;
 }
-
 .panel-center div {
-  display: inline-block;
-  background color: yellow;
-  margin-top: -10px;
+	display: inline-block;
+	background color: yellow;
+	margin-top: -10px;
 }
-
 .panel-right div {
-  display: inline-block;
-  background color: yellow;
-  margin-top: -10px;
+	display: inline-block;
+	background color: yellow;
+	margin-top: -10px;
 }
-
-#eventID{
+#eventID {
 	margin-top: 5px;
 	font-size: 10px;
 	font-family: 'Lato';
 	color: #FAFAFA;
 }
-
 #wrapper {
-    width:500;
-    clear:both;
+	width: 500;
+	clear: both;
 }
 #first {
-    
-    width:166px;
-    float:left;
+	width: 166px;
+	float: left;
 }
 #second {
-   
-    width:166px;
-    float:left;
+	width: 166px;
+	float: left;
 }
 #third {
-  
-    width:166px;
-    float:left;
+	width: 166px;
+	float: left;
 }
