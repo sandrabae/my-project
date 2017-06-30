@@ -9,20 +9,24 @@ classApp.controller('weatherCtrl', function($scope, $http) {
     vm.lat = data.lat;
     vm.lon = data.lon;
 
-
     $scope.getForecastByLocation = function(myName) {
     //console.log("hellooooooooo");
     // alert("This is an example of ng-click");
     vm.zip = myName;
     console.log("this");
 
-    
+    var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
+    var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + vm.zip + ",us" + "&appid=" + apiKey;
+
+    console.log(url);
+    return vm.zip;
     };
+
 
     var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
     var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?zip=" + vm.zip + ",us" + "&appid=" + apiKey;
-   
-
+    
+    $scope.getForecastByLocation();
 
     // Set $scope.location and execute search on API
     vm.setLocation = function(loc) {
