@@ -80,3 +80,6 @@
 		width: 166px;
 		float: left;
 	}
+	.md-toolbar:not(.md-menu-toolbar) {
+    background-color: #34495e;
+}

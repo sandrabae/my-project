@@ -10,66 +10,75 @@
         <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" href="css/app.css"/>
     </head>
-    <body ng-app="weatherApp" ng-controller="weatherCtrl" class= "text-center info" ng-style="weatherBackground">
+
+
+    <body ng-app="weatherApp" ng-controller="weatherCtrl" class= "text-center info" layout ="column">
   
+    <div layout="row" flex>
 
-    <div class ="header">
-      <div class="left"><br>
-       <h3 style="text-align: left; font-size: 25px; color: transparent;">{{formattedTime | uppercase}}</h3>
-       <h3 style="text-align: left; font-size: 25px;">{{formattedDate | uppercase}}</h3>
-       <h3 style="text-align: left; font-size: 25px;">{{formattedTime | uppercase}}</h3>
-      </div>
-      </div>
+      <div layout="column" layout-xs="column" layout-align="space between none" flex="33"> <!-- this is time -->
+      <div style="margin-left: 200px;">
+        <h3 style="text-align: left; font-size: 35px; margin-top: 50px;">{{formattedDate | uppercase}}</h3>
+        <h3 style="text-align: left; font-size: 35px;">{{formattedTime | uppercase}}</h3>
 
-      <div class="right">
-        <div class="input">
-          <input ng-model="myName"  type="text" placeholder="enter city"><br>
-          <button  ng-disabled="myName==null || myName==''" ng-click="getForecastByLocation(myName)" style="margin-top: 10px">Search!</button>
-        </div>
-      </div> 
+        <div layout="row" layout-xs="column" layout-align="center center">
+            <md-input-container>
+              <label>City</label>
+              <input ng-model="myName">
+            </md-input-container>
+              <md-button class="md-raised"  ng-click="getForecastByLocation(myName)">SUBMIT</md-button>
+             </div>
+        </md-content> <!-- this is buttons -->
+      </div>
+      </div> <!--this is end of time -->
+
+
+    <div layout="column" layout-xs="column" layout-align="space between none" flex style="margin-top: 50px;">
+  
+  
+        <div class="panel" style="margin-bottom: 100px;">
+            <h3 style="font-size: 25px; margin-right: 275px; margin-top: 35px; color: #FAFAFA;">{{name | uppercase}}</h3><br>
+
+            <i ng-class="weatherClass" style="font-size:100px; margin-top: -10px; color: #FAFAFA;"></i>
+            <h3 style="text-align: center; font-size: 60px;  margin-top: 15px; color: #FAFAFA; ">{{fTemp | uppercase}}</h3>
+            <p style="color: #FAFAFA;">{{description | uppercase}}</p>
+            <p>{{location}}</p><br>
+           
+                <div id="wrapper">
+                  <div id="first">
+                    <i id="smallIcons" class= "wi wi-horizon-alt"></i>
+                    <p id="eventID">SUNRISE</p>
+                    <p id="subID"">{{formattedSunrise}}</p>
+                  </div>
+                  <div id="second">
+                    <i class= "wi wi-strong-wind" id="smallIcons"></i>
+                    <p id="eventID">WIND</p>
+                    <p id="subID">{{speed}}</p>
+                  </div>
+                  <div id="third">
+                    <i class= "wi wi-humidity" id="smallIcons"></i>
+                    <p id="eventID">HUMIDITY</p>
+                    <p id="subID">{{humidity}}</p>
+                  </div>
+                </div> <!--End of Wrapper-->
+             <div style="margin-left:450px;">
+                <md-button class="md-fab md-mini" aria-label="Time">+</md-button>
+            </div>
+
+           </div> <!--End of Panel-->
+
     </div>
 
 
 
-<br><br>
-  
 
-    <div class="panel">
-        <h3 style="font-size: 25px; margin-right: 275px; margin-top: 35px; color: #FAFAFA;">{{name | uppercase}}</h3><br>
-
-        <i ng-class="weatherClass" style="font-size:100px; margin-top: -10px; color: #FAFAFA;"></i>
-        <h3 style="text-align: center; font-size: 60px;  margin-top: 15px; color: #FAFAFA; ">{{fTemp | uppercase}}</h3>
-        <p style="color: #FAFAFA;">{{description | uppercase}}</p>
-        <p>{{location}}</p><br>
-       
-            <div id="wrapper">
-              <div id="first">
-                <i id="smallIcons" class= "wi wi-horizon-alt"></i>
-                <p id="eventID">SUNRISE</p>
-                <p id="subID"">{{formattedSunrise}}</p>
-              </div>
-              <div id="second">
-                <i class= "wi wi-strong-wind" id="smallIcons"></i>
-                <p id="eventID">WIND</p>
-                <p id="subID">{{speed}}</p>
-              </div>
-              <div id="third">
-                <i class= "wi wi-humidity" id="smallIcons"></i>
-                <p id="eventID">HUMIDITY</p>
-                <p id="subID">{{humidity}}</p>
-              </div>
-        </div>
-
-<!-- <img ng-src="{{icon}}"/> -->
-    </div> <!-- End of panel -->
-        
       <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-        <script src="js/boo.js"></script>
+      <script src="js/boo.js"></script>
 
 
 </body>

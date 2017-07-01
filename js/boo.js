@@ -1,13 +1,10 @@
-var classApp = angular.module('weatherApp', []);
+var classApp = angular.module('weatherApp', ['ngMaterial']);
+
 
 classApp.controller('weatherCtrl', function($scope, $http) {
   var vm = $scope;
 
-  $scope.event = [
-            {"id": 0, "name": "SUNRISE"},
-            {"id": 1, "name": "WIND"},
-            {"id": 2, "name": "HUMIDITY"}
-  ];
+  vm.input = 'Davis';
 
 
   $http.get("http://ip-api.com/json").success(function(data) {

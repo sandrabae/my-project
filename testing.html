@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <title>OpenWeather App</title>
+         <link href='https://fonts.googleapis.com/css?family=Montserrat:300,400,700' rel='stylesheet' type='text/css'>
+         <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/weather-icons.min.css">
+        <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/app.css"/>
+    </head>
+
+
+    <body ng-app="weatherApp" ng-controller="weatherCtrl" class= "text-center info" layout ="column">
+  
+    <div layout="row" style="background-color: lightblue;" flex>
+
+      <div layout="column" layout-xs="column" layout-align="space between none" style="background-color: lightgreen;" > <!-- this is time -->
+      <div style="margin-left: 50px;">
+        <h3 style="text-align: left; font-size: 35px; margin-top: 50px;">{{formattedDate | uppercase}}</h3>
+        <h3 style="text-align: left; font-size: 35px;">{{formattedTime | uppercase}}</h3>
+      </div>
+      </div> <!--this is end of time -->
+
+
+    <div layout="column" layout-xs="column" layout-align="space between none" style="background-color: red;" flex>
+        <md-content> 
+           <div layout="row" layout-xs="column" layout-align="center center">
+            <md-input-container>
+              <label>City</label>
+              <input ng-model="myName">
+            </md-input-container>
+              <md-button class="md-raised"  ng-click="getForecastByLocation(myName)">SUBMIT</md-button>
+             </div>
+        </md-content> <!-- this is buttons -->
+  
+        <div class="panel">
+            <h3 style="font-size: 25px; margin-right: 275px; margin-top: 35px; color: #FAFAFA;">{{name | uppercase}}</h3><br>
+
+            <i ng-class="weatherClass" style="font-size:100px; margin-top: -10px; color: #FAFAFA;"></i>
+            <h3 style="text-align: center; font-size: 60px;  margin-top: 15px; color: #FAFAFA; ">{{fTemp | uppercase}}</h3>
+            <p style="color: #FAFAFA;">{{description | uppercase}}</p>
+            <p>{{location}}</p><br>
+           
+                <div id="wrapper">
+                  <div id="first">
+                    <i id="smallIcons" class= "wi wi-horizon-alt"></i>
+                    <p id="eventID">SUNRISE</p>
+                    <p id="subID"">{{formattedSunrise}}</p>
+                  </div>
+                  <div id="second">
+                    <i class= "wi wi-strong-wind" id="smallIcons"></i>
+                    <p id="eventID">WIND</p>
+                    <p id="subID">{{speed}}</p>
+                  </div>
+                  <div id="third">
+                    <i class= "wi wi-humidity" id="smallIcons"></i>
+                    <p id="eventID">HUMIDITY</p>
+                    <p id="subID">{{humidity}}</p>
+                  </div>
+                </div> <!--End of Wrapper-->
+             <div style="margin-left:450px;">
+                <md-button class="md-fab md-mini" aria-label="Time">+</md-button>
+            </div>
+
+           </div> <!--End of Panel-->
+
+    </div>
+
+
+      <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+      <script src="js/boo.js"></script>
+
+
+</body>
+
+
+</html>
