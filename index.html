@@ -33,10 +33,10 @@
       </div> <!--this is end of time -->
 
 
-    <div layout="column" layout-xs="column" layout-align="space between none" flex style="margin-top: 50px;">
-  
-  
-        <div class="panel" style="margin-bottom: 100px;">
+    <div id="scrollable" layout="column" layout-xs="column" layout-align="space between none" flex style="margin: 0 50 0 50px;">
+            
+
+      <div class="panel">
             <h3 style="font-size: 25px; margin-right: 275px; margin-top: 35px; color: #FAFAFA;">{{name | uppercase}}</h3><br>
 
             <i ng-class="weatherClass" style="font-size:100px; margin-top: -10px; color: #FAFAFA;"></i>
@@ -61,13 +61,47 @@
                     <p id="subID">{{humidity}}</p>
                   </div>
                 </div> <!--End of Wrapper-->
-             <div style="margin-left:450px;">
+                </div> <!--End of Panel-->
+  
+  
+      <div class="panel">
+            <h3 style="font-size: 25px; margin-right: 275px; margin-top: 35px; color: #FAFAFA;">{{name | uppercase}}</h3><br>
+
+            <i ng-class="weatherClass" style="font-size:100px; margin-top: -10px; color: #FAFAFA;"></i>
+            <h3 style="text-align: center; font-size: 60px;  margin-top: 15px; color: #FAFAFA; ">{{fTemp | uppercase}}</h3>
+            <p style="color: #FAFAFA;">{{description | uppercase}}</p>
+            <p>{{location}}</p><br>
+           
+                <div id="wrapper">
+                  <div id="first">
+                    <i id="smallIcons" class= "wi wi-horizon-alt"></i>
+                    <p id="eventID">SUNRISE</p>
+                    <p id="subID"">{{formattedSunrise}}</p>
+                  </div>
+                  <div id="second">
+                    <i class= "wi wi-strong-wind" id="smallIcons"></i>
+                    <p id="eventID">WIND</p>
+                    <p id="subID">{{speed}}</p>
+                  </div>
+                  <div id="third">
+                    <i class= "wi wi-humidity" id="smallIcons"></i>
+                    <p id="eventID">HUMIDITY</p>
+                    <p id="subID">{{humidity}}</p>
+                  </div>
+                </div> <!--End of Wrapper-->
+                </div> <!--End of Panel-->
+
+    </div> <!--End of scrollable-->
+
+    </div><!--End of Row-->
+
+
+
+           <div layout="column">  
+             <div style="margin-left:900px; margin-bottom: 50px;">
                 <md-button class="md-fab md-mini" aria-label="Time">+</md-button>
             </div>
-
-           </div> <!--End of Panel-->
-
-    </div>
+            </div>
 
 
 
@@ -80,6 +114,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
       <script src="js/boo.js"></script>
 
+ 
 
 </body>
 

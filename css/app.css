@@ -49,6 +49,7 @@
 		margin-left: auto;
 		margin-right: auto;
 		background-color: #8EBCBB;
+
 	}
 	#smallIcons{
 		font-size: 20px; 
@@ -63,6 +64,10 @@
 		font-size: 10px;
 		font-family: 'Lato';
 		color: #FAFAFA;
+	}
+	#scrollable{
+		overflow-y: auto;
+		height: 100%;
 	}
 	#wrapper {
 		width: 500;
