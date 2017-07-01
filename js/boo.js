@@ -1,4 +1,4 @@
-var classApp = angular.module('weatherApp', ['ngMaterial']);
+// var classApp = angular.module('weatherApp', ['ngMaterial']);
 
 
 classApp.controller('weatherCtrl', function($scope, $http) {
