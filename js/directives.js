@@ -10,7 +10,7 @@ var app =angular.module('weatherApp.directives', [])
 app.directive('addbuttonsbutton', function(){
   return {
     restrict: "A",
-    template: "<md-button addbuttons class='md-fab md-mini'>+</md-button>"
+    template: "<md-button addbuttons ng-click='clickCounter()' class='md-fab md-mini'>+</md-button>"
 
   }
 });

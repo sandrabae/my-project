@@ -8,10 +8,9 @@ angular.module('weatherApp.controllers', [])
 .controller('weatherCtrl', function($scope, $http) {
   var vm = $scope;
 
-  vm.count = 0;
+
 
   $http.get("http://ip-api.com/json").success(function(data) {
-    var poop = data.city;
 
     var categories = [
           {"id": 1, "city": "Boston"},
@@ -26,9 +25,29 @@ angular.module('weatherApp.controllers', [])
           {"id": 10, "city": "San Francisco"},
       ];
 
-    vm.example = categories[1].city
-    var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
-    var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + poop + ",us" + "&appid=" + apiKey;
+
+    var city = data.city;
+      var cityCounting = 0;
+
+    var counter = 0;
+
+  $scope.clickCounter =function () {
+      cityCounting = counter++;
+      console.log(cityCounting);
+      return cityCounting;
+    }
+    console.log(cityCounting);
+    if(cityCounting == 0){
+      var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
+    var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + ",us" + "&appid=" + apiKey;
+    console.log("no im from city original here");
+    }
+    else{
+      var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
+    var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityCounting + ",us" + "&appid=" + apiKey;
+        console.log("no im from city counting");
+    }
+
     
 
     $http.get(openWeatherURL).success(function(data) {
@@ -156,7 +175,7 @@ angular.module('weatherApp.controllers', [])
 
     $scope.getForecastByLocation = function(myName) {
     
-    vm.skiaddle = myName;
+    vm.city = myName;
     console.log("this");
 
     var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
