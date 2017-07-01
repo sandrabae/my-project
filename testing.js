@@ -8,7 +8,7 @@ function MainCtrl($scope) {
 myApp.directive("addbuttonsbutton", function(){
 	return {
 		restrict: "E",
-		template: "<button addbuttons>Hello</button>"
+		template: "<button addbuttons>Click to add buttons</button>"
 	}
 });
 

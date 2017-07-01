@@ -8,18 +8,35 @@ angular.module('weatherApp.controllers', [])
 .controller('weatherCtrl', function($scope, $http) {
   var vm = $scope;
 
-  $http.get("http://ip-api.com/json").success(function(data) {
-    vm.city = data.city;
+  vm.count = 0;
 
+  $http.get("http://ip-api.com/json").success(function(data) {
+    var poop = data.city;
+
+    var categories = [
+          {"id": 1, "city": "Boston"},
+          {"id": 2, "city": "New York"},
+          {"id": 3, "city": "Seattle"},
+          {"id": 4, "city": "Los Angeles"},
+          {"id": 5, "city": "Miami"},
+          {"id": 6, "city": "Fresno"},
+          {"id": 7, "city": "Tracy"},
+          {"id": 8, "city": "Portland"},
+          {"id": 9, "city": "Norfolk"},
+          {"id": 10, "city": "San Francisco"},
+      ];
+
+    vm.example = categories[1].city
     var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
-    var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + vm.city + ",us" + "&appid=" + apiKey;
+    var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + poop + ",us" + "&appid=" + apiKey;
     
 
     $http.get(openWeatherURL).success(function(data) {
-      var string = JSON.stringify()
+  
       vm.description = data.weather[0].description;
       vm.speed = (2.237 * data.wind.speed).toFixed(1) + " mph";
       vm.name = data.name;
+      console.log("get by forecast");
       vm.humidity = data.main.humidity + " %";
       vm.temp = data.main.temp;
       vm.fTemp = (vm.temp * (9 / 5) - 459.67).toFixed(1) + " °F";
@@ -139,7 +156,7 @@ angular.module('weatherApp.controllers', [])
 
     $scope.getForecastByLocation = function(myName) {
     
-    vm.city = myName;
+    vm.skiaddle = myName;
     console.log("this");
 
     var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
@@ -150,7 +167,7 @@ angular.module('weatherApp.controllers', [])
       $http.get(updatedURL).success(function(data) {
 
       vm.description = data.weather[0].description;
-      console.log("hello ya reached me");
+      console.log("get by forecast");
       vm.speed = (2.237 * data.wind.speed).toFixed(1) + " mph";
       vm.name = data.name;
       vm.humidity = data.main.humidity + " %";

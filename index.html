@@ -13,7 +13,7 @@
 
 
     <body ng-app="weatherApp" ng-controller="weatherCtrl" class= "text-center info" layout ="column">
-  
+    <p>{{example}}</p>
     <div layout="row" flex>
 
       <div layout="column" layout-xs="column" layout-align="space between none" flex="33"> <!-- this is time -->
@@ -36,39 +36,13 @@
     <div id="scrollable" layout="column" layout-xs="column" layout-align="space between none" flex style="margin: 0 50 0 50px;">
             
 
-      <div class="panel">
-            <h3 style="font-size: 25px; margin-right: 275px; margin-top: 35px; color: #FAFAFA;">{{name | uppercase}}</h3><br>
-
-            <i ng-class="weatherClass" style="font-size:100px; margin-top: -10px; color: #FAFAFA;"></i>
-            <h3 style="text-align: center; font-size: 60px;  margin-top: 15px; color: #FAFAFA; ">{{fTemp | uppercase}}</h3>
-            <p style="color: #FAFAFA;">{{description | uppercase}}</p>
-            <p>{{location}}</p><br>
-           
-                <div id="wrapper">
-                  <div id="first">
-                    <i id="smallIcons" class= "wi wi-horizon-alt"></i>
-                    <p id="eventID">SUNRISE</p>
-                    <p id="subID"">{{formattedSunrise}}</p>
-                  </div>
-                  <div id="second">
-                    <i class= "wi wi-strong-wind" id="smallIcons"></i>
-                    <p id="eventID">WIND</p>
-                    <p id="subID">{{speed}}</p>
-                  </div>
-                  <div id="third">
-                    <i class= "wi wi-humidity" id="smallIcons"></i>
-                    <p id="eventID">HUMIDITY</p>
-                    <p id="subID">{{humidity}}</p>
-                  </div>
-                </div> <!--End of Wrapper-->
-                </div> <!--End of Panel-->
-  
+    <div id="space-for-buttons"></div>
   
       <div class="panel">
-            <h3 style="font-size: 25px; margin-right: 275px; margin-top: 35px; color: #FAFAFA;">{{name | uppercase}}</h3><br>
+            <h3 id="title">{{name | uppercase}}</h3><br>
 
-            <i ng-class="weatherClass" style="font-size:100px; margin-top: -10px; color: #FAFAFA;"></i>
-            <h3 style="text-align: center; font-size: 60px;  margin-top: 15px; color: #FAFAFA; ">{{fTemp | uppercase}}</h3>
+            <i ng-class="weatherClass" id="icon"></i>
+            <h3 id="temp">{{fTemp | uppercase}}</h3>
             <p style="color: #FAFAFA;">{{description | uppercase}}</p>
             <p>{{location}}</p><br>
            
@@ -95,11 +69,9 @@
 
     </div><!--End of Row-->
 
-
-
            <div layout="column">  
              <div style="margin-left:900px; margin-bottom: 50px;">
-                <md-button class="md-fab md-mini" aria-label="Time">+</md-button>
+             <div addbuttonsbutton></div>
             </div>
             </div>
 
@@ -115,7 +87,7 @@
         <script src="js/app.js"></script>
         <!-- <script src="js/services.js"></script> -->
         <script src="js/controllers.js"></script>
-        <!-- <script src="js/directives.js"></script> -->
+        <script src="js/directives.js"></script>
 
  
 
