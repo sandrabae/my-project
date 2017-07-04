@@ -50,7 +50,6 @@ app.directive('addbuttonsbutton2', function(){
 app.directive('addbuttons2', function($compile){
     return function(scope, element, attrs){
     element.bind("click", function(){
-      console.log("are you even me? plz");
       angular.element(document.getElementById('space-for-buttons2')).prepend($compile(
         "<p>Coordinates: [{{lat}}, {{lon}}]</p>")(scope));
     });
