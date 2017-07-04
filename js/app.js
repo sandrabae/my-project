@@ -4,5 +4,6 @@
 angular.module('weatherApp', [
   'ngMaterial',
   'weatherApp.controllers',
-  'weatherApp.directives'
+  'weatherApp.directives',
+  'weatherApp.services'
 ]);
