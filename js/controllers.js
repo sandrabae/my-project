@@ -8,7 +8,7 @@ app.controller('weatherCtrl', ['$scope', '$sce','Data', 'Geolocation',
 
 		function($scope, $sce, Data, Geolocation) {
 			$scope.count = -1;
-			$scope.city = 'Davis';
+			$scope.city = 'Norfolk';
 			var cityCounting = 0;
 			var counter = 0;
 
