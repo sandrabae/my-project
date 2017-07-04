@@ -8,27 +8,26 @@ app.controller('weatherCtrl', ['$scope', 'Data',
 
 		function($scope, Data) {
 			$scope.count = -1;
-
-			$scope.city = 'Berkeley';
+			$scope.city = 'Davis';
 			var cityCounting = 0;
 			var counter = 0;
 
         	var cities = [
-          'Sydney, AU',
-          'Melbourne, AU',
-          'Tokyo',
-          'Osaka',
-          'Seoul',
-          'Hong Kong',
-          'London',
-          'Amsterdam',
-          'Berlin',
-          'Paris',
-          'Barcelona',
-          'New York',
-          'Dubai',
-          'Antarctica'
-        ];
+	          'Sydney, AU',
+	          'Melbourne, AU',
+	          'Tokyo',
+	          'Osaka',
+	          'Seoul',
+	          'Hong Kong',
+	          'London',
+	          'Amsterdam',
+	          'Berlin',
+	          'Paris',
+	          'Barcelona',
+	          'New York',
+	          'Dubai',
+	          'Antarctica'
+	        ];
 
 			$scope.clickCounter = function(){
 			    cityCounting = counter++;
@@ -441,134 +440,3 @@ app.controller('weatherCtrl', ['$scope', 'Data',
 		}
 	]) //end of controller
 
-// var app = angular.module('weatherApp.controllers', [])
-// 	app.controller('weatherCtrl', ['$scope','Data',
-// 		function($scope, Data) {
-// $scope.getForecastByLocation = function(myName) {
-//    	$scope.city = myName;
-//    	Data.getApps($scope.city);
-// },	
-// 		Data.getApps(city)
-// 		.then(function(data)){
-// 		//doing a bunch of things like converting units, etc
-// 		},
-// 		function(res){
-// 			if(res.status === 500) {
-//             // server error, alert user somehow
-//         } else { 
-//             // probably deal with these errors differently
-//         }
-//    		}); // end of function
-// }]) // end of controller 
-
-//   Controller for "open weather map" api data search
-//   .controller('OpenWeatherCtrl',
-//     ['$scope','openWeatherMap','exampleLocations','stormLocations','ISO3166',
-//       function($scope,openWeatherMap,exampleLocations,stormLocations,ISO3166) {
-
-//     $scope.message = '';
-//     $scope.hasState = '';
-
-//     // Expose example locations to $scope
-//     $scope.currentLocation = currentLocation;
-//     $scope.stormLocations = stormLocations;
-//     $scope.iconBaseUrl = 'http://openweathermap.org/img/w/';
-
-//     // On initialization load data for first example entry
-//     $scope.forecast = openWeatherMap.queryForecastDaily({
-//       location: exampleLocations[ 0 ]
-//     });
-
-//     // Get forecast data for location as given in $scope.location
-//     $scope.getForecastByLocation = function() {
-
-//       if ($scope.location == '' || $scope.location == undefined) {
-//         $scope.hasState = 'has-warning';
-//         $scope.message = 'Please provide a location';
-//         return;
-//       }
-
-//       $scope.hasState = 'has-success';
-
-//       $scope.forecast = openWeatherMap.queryForecastDaily({
-//         location: $scope.location
-//       });
-//     };
-
-//     // Set $scope.location and execute search on API
-//     $scope.setLocation = function(loc) {
-//       $scope.location = loc;
-//       $scope.getForecastByLocation();
-//     };
-
-//     // Get icon image url
-//     $scope.getIconImageUrl = function(iconName) {
-//       return (iconName ? $scope.iconBaseUrl + iconName + '.png' : '');
-//     };
-
-//   }])
-
-
-
-
-
-
-
-
-// // // $http.get("http://ip-api.com/json").success(function(data) {
-
-// //     var categories = [
-// //           {"id": 1, "city": "Boston"},
-// //           {"id": 2, "city": "New York"},
-// //           {"id": 3, "city": "Seattle"},
-// //           {"id": 4, "city": "Los Angeles"},
-// //           {"id": 5, "city": "Miami"},
-// //           {"id": 6, "city": "Fresno"},
-// //           {"id": 7, "city": "Tracy"},
-// //           {"id": 8, "city": "Portland"},
-// //           {"id": 9, "city": "Norfolk"},
-// //           {"id": 10, "city": "San Francisco"},
-// //       ];
-
-
-// //     var city = data.city;
-// //       var cityCounting = 0;
-
-// //     var counter = 0;
-
-// //   $scope.clickCounter =function () {
-// //     cityCounting = counter++;
-// //     console.log(cityCounting);
-// //     var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
-// //     var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + categories[cityCounting].city + ",us" + "&appid=" + apiKey;
-
-// //     $http.get(openWeatherURL).success(function(data) {
-      
-
-// //     }); //closing OpenWeatherMap
-
-// //     } //closing clickCounter
-// //     console.log(cityCounting);
-// //     if(cityCounting == 0){
-// //       var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
-// //     var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + ",us" + "&appid=" + apiKey;
-// //     console.log("no im from city original here");
-// //     }
-// //     else{
-
-// //       var apiKey = "d544ef9e2e6f8bd6a4b1d6325950b77e";
-// //     var openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityCounting + ",us" + "&appid=" + apiKey;
-// //         console.log("no im from city counting");
-// //     }
-
-
-
-
-
-
-
-// //     };//getForecastByLocation
-
-
-// //   }); //closing IP-API
-// // }); //closing Controller
