@@ -13,7 +13,7 @@ var app =angular.module('weatherApp.services', [])
    return {
       getApps: function(city) {
          if(!promise || lastRequestFailed) {
-            // $http returns ['weatherClass' + cityCounting] promise, so we don'['weatherClass' + cityCounting] need to create one with $q
+            // $http returns a promise, so we don't need to create one with $q
 
             promise = $http.get('http://api.openweathermap.org/data/2.5/weather?',{
               params: {

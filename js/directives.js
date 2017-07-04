@@ -4,8 +4,7 @@
 
 var app =angular.module('weatherApp.directives', [])
 
-  //Directive that returns an element which adds buttons on click which show an alert on click
-//Directive that returns an element which adds buttons on click which show an alert on click
+//Directive for adding an attribute to the button
 app.directive('addbuttonsbutton', function(){
   return {
     restrict: "A",
@@ -38,9 +37,4 @@ app.directive('addbuttons', function($compile){
   };
 });
 
-  //
-  // Simple directive just setting version as elements value (kept from angular-seed dist)
-  //
   
-
-
