@@ -53,20 +53,11 @@ app.controller('weatherCtrl', ['$scope', '$sce','Data', 'Geolocation',
 
 		          $scope.lat = position.coords.latitude;
 		          $scope.lon = position.coords.longitude;
-		         
-
-		          $scope.locationImg =[{
-					    src: 'https://maps.googleapis.com/maps/api/staticmap?center=' + $scope.lat + ',' + $scope.lon + '&zoom=13&size=350x200&sensor=false" width="350" height="200&key=AIzaSyD-gHlPajD1dMKnUgjo2LGTPS01HVhO2qU',
-						
-					}];
-					console.log("heheh hello");
-					 console.log($scope.lat);
+		          console.log($scope.lat);
 		          console.log($scope.lon);
-		           console.log($scope.locationImg);
-		        
 
 
-		          // $sce.trustAsHtml('<img style="margin-right: 100px;" src="https://maps.googleapis.com/maps/api/staticmap?center=' + $scope.lat + ',' + $scope.lon + '&zoom=13&size=350x200&sensor=false" width="350" height="200" />')
+		          $scope.locationImg = $sce.trustAsHtml('<img style="margin-right: 100px;" src="https://maps.googleapis.com/maps/api/staticmap?center=' + $scope.lat + ',' + $scope.lon + '&zoom=13&size=350x200&sensor=false" width="350" height="200"&key=AIzaSyD-gHlPajD1dMKnUgjo2LGTPS01HVhO2qU/>')
 		          Geolocation.getLocation($scope.lat, $scope.lon).then(function(data){
 		          	$scope.data = data;
 
