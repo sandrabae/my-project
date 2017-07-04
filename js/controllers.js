@@ -59,6 +59,7 @@ app.controller('weatherCtrl', ['$scope', '$sce','Data', 'Geolocation',
 					    src: 'https://maps.googleapis.com/maps/api/staticmap?center=' + $scope.lat + ',' + $scope.lon + '&zoom=13&size=350x200&sensor=false" width="350" height="200',
 						
 					}];
+					console.log("heheh hello");
 					 console.log($scope.lat);
 		          console.log($scope.lon);
 		           console.log($scope.locationImg);
