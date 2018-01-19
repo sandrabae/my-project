@@ -1,100 +1,622 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="utf-8">
-        <title>OpenWeather App</title>
-         <link href='https://fonts.googleapis.com/css?family=Montserrat:300,400,700' rel='stylesheet' type='text/css'>
-         <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="css/weather-icons.min.css">
-        <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css"/>
-        <link rel="stylesheet" href="css/app.css"/>
-    </head>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8>
+<title>Disease Map</title>
+<script src='https://unpkg.com/scrollama'></script>
+<script src="js/three.js"></script>
+<script src="data/mesh.js"></script>
+<script src="data/story.js"></script>
+<script src="./js/dat.gui.js"></script>
+<script src='./js/d3.v4.min.js'></script>
+<link href="./css/style.css" rel="stylesheet">
+<script>
+// tableau 20
+// var colors = ["rgb(22, 36, 79)", "rgb(85, 21, 11)", "rgb(99, 59, 13)",
+//               "rgb(13, 58, 13)", "rgb(59, 5, 59)", "rgb(12, 60, 77)",
+// 			  "rgb(85, 26, 47)", "rgb(41, 66, 10)", "rgb(21, 39, 58)",
+// 			  "rgb(98, 76, 18)", "rgb(140, 86, 75)", "rgb(196, 156, 148)",
+// 			  "rgb(227, 119, 194)", "rgb(247, 182, 210)", "rgb(127, 127, 127)",
+// 			  "rgb(199, 199, 199)", "rgb(188, 189, 34)", "rgb(219, 219, 141)",
+// 		      "rgb(23, 190, 207)", "rgb(158, 218, 229)"]
 
+// tableau 10 medium
+//var colors = ["rgb(114,158,206)", "rgb(255,158,74)", "rgb(103,191,92)", "rgb(237,102,93)", "rgb(173,139,201)",
+//              "rgb(168,120,110)", "rgb(237,151,202)", "rgb(162,162,162)", "rgb(205,204,93)", "rgb(109,204,218)"]
 
-    <body ng-app="weatherApp" ng-controller="weatherCtrl" class= "text-center info" layout ="column">
-    <p>{{example}}</p>
-    <div layout="row" flex>
+// tableau 10 (for dark background)
+var colors = ["rgb(31,119,180)", "rgb(255,127,14)", "rgb(44,160,44)", "rgb(214,39,40)", "rgb(148,103,189)",
+              "rgb(23,190,207)", "rgb(227,119,194)", "rgb(127,127,127)", "rgb(188,189,34)", "rgb(140,86,75)",
+		      "rgb(0, 0, 0)"] // last one is for inner circle color
 
-      <div layout="column" layout-xs="column" layout-align="space between none" flex="33"> <!-- this is time -->
-      <div style="margin-left: 100px;">
-        <h3 style="text-align: left; font-size: 35px; margin-top: 50px;">{{formattedDate | uppercase}}</h3>
-        <h3 style="text-align: left; font-size: 35px;">{{formattedTime | uppercase}}</h3>
+// new tableau 10 (for white background)
+var colors = ["rgb(72,123,166)", "rgb(247,142,50)", "rgb(229,93,90)",  "rgb(87,157,82)", "rgb(241,197,79)",
+              "rgb(114,181,178)", "rgb(177,126,160)", "rgb(255,160,167)", "rgb(158,117,96)", "rgb(186,176,172)",
+		      "rgb(0, 0, 0)"] // last one is for inner circle color
 
-        <div layout="row" layout-xs="column" layout-align="center center" >
-            <md-input-container>
-              <label>City</label>
-              <input ng-model="city">
-            </md-input-container>
-              <md-button class="md-raised"  ng-click="getForecastByLocation()">SUBMIT</md-button><br>
-              <div addbuttonsbutton2></div>
-        </div> <!-- this is buttons -->
-        <div id="space-for-buttons2"></div>
-           <img ng-src="{{locationImg[0].src}}"/>
-          </section>
+// from this web site http://vrl.cs.brown.edu/color (2016 VIS paper)
+//var colors = ["rgb(79,140,157)", "rgb(135,21,80)", "rgb(58,166,9)", "rgb(241,82,182)", "rgb(6,150,104)", "rgb(246,57,67)", "rgb(11,57,17)", "rgb(199,18,232)", "rgb(111,125,67)", "rgb(91,8,145)", "rgb(211,122,65)", "rgb(1,54,136)", "rgb(142,55,17)", "rgb(119,113,255)", "rgb(64,45,9)", "rgb(58,145,251)", "rgb(204,117,163)"];
+var controller = { Sex: 'Both', Categories: "Endocrine,nutritional and metabolic diseases,and immunity disorders"};
 
-      </div>
-      </div> <!--this is end of time -->
+var categories = ["Infectious and parasitic diseases","Neoplasms","Endocrine,nutritional and metabolic diseases,and immunity disorders","Diseases of the blood and blood-forming organs","Mental disorders","Diseases of the nervous system and sense organs","Diseases of the circulatory system","Diseases of the respiratory system","Diseases of the digestive system","Diseases of the genitourinary system","Complications of pregnancy,childbirth,and puerperium","Diseases of the skin and subcutaneous tissue","Diseases of the musculoskeletal system and connective tissue","Congenital anomalies","Certain conditions originating in the perinatal period","Symptoms, signs, and ill-defined conditions","Injury and poisoning"];
+var ageGroups = ["0-9", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89" ];
 
+// generate an indicator for each cell
+var allocation = {'row':'sex', 'col':'age', 'cell':'category'};
+var rowVals = ['m', 'f'];
+var colVals = ['0', '1', '2'];
+var cellVal = '2';
+var translation = [0.0, 0.0, 0.0]; // x, y, z
+var scale = 1.0;
+var keyAndVals = [];
+var storyNum = 0;
 
-    <div id="scrollable" layout="column" layout-xs="column" layout-align="space between none" flex style="margin: 0 50 0 50px;">
+function updateKeyAndVals() {
+	keyAndVals = [];
+	for (var i = 0; i < rowVals.length; i++) {
+		var rowVal = rowVals[i];
+		var rowElems = [];
+		for (var j = 0; j < colVals.length; j++) {
+			var colVal = colVals[j];
+			var rowKey = allocation.row;
+			var colKey = allocation.col;
+			var cellKey = allocation.cell;
+			var colElem = {'rowKey':rowKey, 'rowVal':rowVal,
+			               'colKey':colKey, 'colVal':colVal,
+		                   'cellKey':cellKey, 'cellVal':cellVal};
+			rowElems.push(colElem);
+		}
+		keyAndVals.push(rowElems);
+	}
+}
 
-    <div id="space-for-buttons"></div>
-  
-      <div class="panel">
-            <h3 id="title">{{name | uppercase}}</h3><br>
+function symbolToDesc(type, val) {
+	var result = '';
+	if (type == 'sex') {
+		if (val == 'm')      result = 'male';
+		else if (val == 'f') result = 'female';
+	} else if (type == 'age') {
+        result = ageGroups[parseInt(val)] + ' years';
+	} else if (type == 'category') {
+        result = categories[parseInt(val)];
+	}
 
-            <i ng-class="weatherClass" id="icon"></i>
-            <h3 id="temp">{{fTemp | uppercase}}</h3>
-            <p style="color: #FAFAFA;">{{description | uppercase}}</p>
-            <p>{{location}}</p><br>
-           
-                <div id="wrapper">
-                  <div id="first">
-                    <i id="smallIcons" class= "wi wi-horizon-alt"></i>
-                    <p id="eventID">SUNRISE</p>
-                    <p id="subID"">{{formattedSunrise}}</p>
-                  </div>
-                  <div id="second">
-                    <i class= "wi wi-strong-wind" id="smallIcons"></i>
-                    <p id="eventID">WIND</p>
-                    <p id="subID">{{speed}}</p>
-                  </div>
-                  <div id="third">
-                    <i class= "wi wi-humidity" id="smallIcons"></i>
-                    <p id="eventID">HUMIDITY</p>
-                    <p id="subID">{{humidity}}</p>
-                  </div>
-                </div> <!--End of Wrapper-->
-                </div> <!--End of Panel-->
+	// trim long description
+	// if (result.length > 45) {
+	// 	result = result.substr(0, 44);
+	// 	result = result + ' ...';
+	// }
+	return result;
+}
 
-    </div> <!--End of scrollable-->
+function draw() {
+	updateKeyAndVals();
+    addLabels();
 
-    </div><!--End of Row-->
+	var vDiv = 1;
+	var hDiv = 1;
+	if (keyAndVals.length > 0) {
+		vDiv = keyAndVals.length;
+		if (keyAndVals[0].length > 0) {
+			hDiv = keyAndVals[0].length;
+		}
+	}
 
-           <div layout="column">  
-             <div style="margin-left:900px; margin-bottom: 50px;">
-             <div addbuttonsbutton></div>
+    var width = document.getElementById('canvas').clientWidth / hDiv - 1;
+	var height = document.getElementById('canvas').clientHeight / vDiv - 1;
+
+	var sizePerVertex = 9;
+	for (var row = 0; row < keyAndVals.length; row++) {
+		for (var col = 0; col < keyAndVals[row].length; col++) {
+
+			var d = data.filter(function(value) {
+				if (value[this.rowKey] == this.rowVal &&
+					value[this.colKey] == this.colVal &&
+					value[this.cellKey] == this.cellVal) {
+						return value;
+				}
+			}, keyAndVals[row][col])[0];
+
+			var sex = d.sex;
+			var age = d.age;
+			var cateNum = d.category;
+			var vertices = d.mesh;
+			var crack_categories = d.mesh_caterogry;
+
+		    var scene = new THREE.Scene();
+		    var camera = new THREE.PerspectiveCamera( 40, width / height, 1, 1000 );
+		    camera.position.x = 0;
+		    camera.position.z = 2;
+		    scene.add( camera );
+
+		    // lighting
+		    var light = new THREE.DirectionalLight( 0xffffff, 1.5 );
+		    light.position.set( 0.5, 0.5, 1 ).normalize();
+		    scene.add( light );
+		    var light2 = new THREE.DirectionalLight( 0xffffff, 0.5 );
+		    light2.position.set( -0.4, -0.2, 1 ).normalize();
+		    scene.add( light2 );
+
+		    // renderer
+		    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+		    renderer.setSize( width, height );
+			renderer.setPixelRatio(window.devicePixelRatio || 1);
+
+			// make div for layout and text
+			var divCanvas = document.createElement("div");
+			divCanvas.className = "block";
+			divCanvas.appendChild(renderer.domElement);
+			divCanvas.id = age+ sex + '-' + cateNum;
+			document.body.appendChild(divCanvas);
+			document.getElementById('canvas').appendChild(divCanvas);
+
+			// mesh vertices (should be couterclockwise order with current settings)
+		    for (var i = 0; i < vertices.length / sizePerVertex; i++) {
+				var geometry = new THREE.Geometry();
+				var v1 = new THREE.Vector3(vertices[i * sizePerVertex + 0], vertices[i * sizePerVertex + 1],  vertices[i * sizePerVertex + 2]);
+				var v2 = new THREE.Vector3(vertices[i * sizePerVertex + 3], vertices[i * sizePerVertex + 4],  vertices[i * sizePerVertex + 5]);
+				var v3 = new THREE.Vector3(vertices[i * sizePerVertex + 6], vertices[i * sizePerVertex + 7],  vertices[i * sizePerVertex + 8]);
+				geometry.vertices.push(v1);
+				geometry.vertices.push(v2);
+				geometry.vertices.push(v3);
+
+				// compute normals
+				geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
+				geometry.computeFaceNormals();
+
+				var category = crack_categories[i];
+				var colStr = new THREE.Color(colors[category]);
+				//var color = new THREE.Color(colors[category]);
+				//var hsl = color.getHSL();
+				//var intensity = vertices[i * sizePerVertex + 3];
+				//var colStr = "hsl(" + Math.floor(hsl.h * 360) + "," + Math.floor(hsl.s * 100) + "%," + Math.min(100, Math.floor(hsl.l * intensity * 100))  + "%)";
+				//if (intensity < 0) {
+				//	colStr = "rgb(10, 10, 10)";
+					//colStr = "rgb(200, 200, 200)";
+				//}
+
+				var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: colStr } ) );
+				// var mesh = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( {
+				// 						   color: colStr,
+				// 						   transparent: true,
+				// 						   opacity: Math.max(0.0, intensity) } ) );
+
+				mesh.geometry.mergeVertices();
+                mesh.geometry.applyMatrix(
+                    new THREE.Matrix4().makeTranslation(translation[0], translation[1], translation[2])
+                );
+                mesh.scale.copy(new THREE.Vector3(scale, scale, scale));
+				//mesh.geometry.computeVertexNormals();
+		        scene.add(mesh);
+		    }
+			renderer.render( scene, camera );
+		}
+	}
+}
+
+window.addEventListener('DOMContentLoaded', draw, false);
+// function onWindowResize(){
+//     camera.aspect = window.innerWidth / window.innerHeight;
+//     camera.updateProjectionMatrix();
+//
+//     renderer.setSize(window.innerWidth, window.innerHeight);
+// }
+
+// TODO: this rerenders everything, probably changing camera and window sizes are faster
+// to do this, we need to make list of cameras, etc.
+var delay = 250;
+var throttled = false;
+window.addEventListener('resize', function() {
+    if (!throttled) {
+        throttled = true;
+        setTimeout(function() {
+            throttled = false;
+        }, delay);
+        removeCanvas();
+        draw();
+    }
+}, false);
+
+function addLabels() {
+    removeLabels();
+    var desc = symbolToDesc(allocation.cell, cellVal);
+    var divLabel = document.createElement('div');
+    var textLabel = document.createTextNode(desc);
+    var cellLabelArea = document.getElementById('cell-label-area');
+    divLabel.className = 'cell-label';
+    cellLabelArea.appendChild(divLabel);
+    divLabel.appendChild(textLabel);
+
+    for (var i = 0; i < rowVals.length; i++) {
+        var desc = symbolToDesc(allocation.row, rowVals[i]);
+        var divLabel = document.createElement('div');
+        var textLabel = document.createTextNode(desc);
+        var rowLabelArea = document.getElementById('row-label-area');
+        divLabel.className = 'row-label';
+        divLabel.style.height = (100 / rowVals.length).toString() + '%';
+        rowLabelArea.appendChild(divLabel);
+        divLabel.appendChild(textLabel);
+    }
+    for (var i = 0; i < colVals.length; i++) {
+        var desc = symbolToDesc(allocation.col, colVals[i]);
+        var divLabel = document.createElement('div');
+        var textLabel = document.createTextNode(desc);
+        var colLabelArea = document.getElementById('col-label-area');
+        divLabel.className = 'col-label';
+        divLabel.style.width = (100 / colVals.length).toString() + '%';
+        colLabelArea.appendChild(divLabel);
+        divLabel.appendChild(textLabel);
+    }
+}
+
+function drawImage(imagePath, imageScale) {
+    updateKeyAndVals();
+    addLabels();
+    var originalImg = new Image();
+    originalImg.src = imagePath;
+    var aspectRatio  = originalImg.width / originalImg.height;
+    var divCanvas = document.getElementById('canvas');
+    var imgNode = document.createElement('img');
+    var imgWidth = (imageScale || 1.0) * divCanvas.clientWidth - 1;
+    var imgHeight = imgWidth / aspectRatio;
+    imgNode.className = 'story-image';
+    imgNode.setAttribute('src', imagePath);
+    imgNode.setAttribute('width', imgWidth);
+    imgNode.setAttribute('height', imgHeight);
+    imgNode.setAttribute('alt', 'image');
+    divCanvas.appendChild(imgNode);
+}
+
+function removeCanvas() {
+    var divCanvas = document.getElementById('canvas');
+	while (divCanvas.getElementsByTagName('canvas')[0]) {
+		var element = divCanvas.getElementsByTagName('canvas')[0];
+		element.remove();
+	}
+	while (divCanvas.getElementsByClassName('block')[0]) {
+		var element = divCanvas.getElementsByClassName('block')[0];
+		element.remove();
+	}
+    while (divCanvas.getElementsByTagName('img')[0]) {
+		var element = divCanvas.getElementsByTagName('img')[0];
+		element.remove();
+	}
+}
+
+function removeLabels() {
+    while (document.getElementsByClassName('cell-label')[0]) {
+		var element = document.getElementsByClassName('cell-label')[0];
+		element.remove();
+	}
+    while (document.getElementsByClassName('row-label')[0]) {
+		var element = document.getElementsByClassName('row-label')[0];
+		element.remove();
+	}
+    while (document.getElementsByClassName('col-label')[0]) {
+		var element = document.getElementsByClassName('col-label')[0];
+		element.remove();
+	}
+}
+
+function updateCellVal(position) {
+	cellVal = position;
+	removeCanvas();
+	draw();
+}
+
+function updateRowVal(position){
+	position = position.sort(function(a, b) { return a - b; });
+	rowVals = position;
+	removeCanvas();
+	draw();
+}
+
+function updateColVal(position){
+	position = position.sort(function(a, b) { return a - b; });
+	colVals = position;
+	removeCanvas();
+	draw();
+}
+
+function updateAllocation(value, section) {
+	var mapAll = {"Sex" : "sex", "Age Groups": "age", "Categories": "category"};
+	allocation[section] = mapAll[value];
+}
+
+function updateControllerOptions(group, values, params){
+	var type = params.allocation[group];
+	var options = params[values];
+	var usersSelection = options;
+	//if cell then options is not an array
+	if(group.includes("cell")){
+		// single value
+		usersSelection = [options];
+	}
+
+	if(type.includes("sex")){
+		if(usersSelection.length > 1){ controller["Sex"] = "Both";}
+		else{
+			var sexMap = {"m": "Male", "f": "Female"};
+			controller["Sex"] = sexMap[usersSelection[0]];
+		}
+	}
+
+	usersSelection.forEach(function(d){
+		if(type.includes("age")){
+			console.log(d);
+		}
+		else if(type.includes("category")){
+			console.log(d);
+		}
+	});
+
+}
+
+function updateController(params){
+	var mapAll = {"sex" : "Sex", "age": "Age Groups", "category": "Categories"};
+	controller["Row Options"] = mapAll[params.allocation.row];
+	controller["Column Options"] = mapAll[params.allocation.col];
+	controller["Cell Options"] = mapAll[params.allocation.cell];
+
+	updateControllerOptions("col", "colVals", params);
+	updateControllerOptions("row", "rowVals", params);
+	updateControllerOptions("cell", "cellVal", params);
+
+	addOrRemoveFolder(mapAll[params.allocation.row], f1, 0);
+	addOrRemoveFolder(mapAll[params.allocation.col], f2, 1);
+	addOrRemoveFolder(mapAll[params.allocation.cell], f3, 2);
+}
+
+function updateParams(params, storyNum) {
+    /*
+    params should be this format
+    {
+        'changeState': false, // if changeState == false, other info is optional
+        'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
+        'rowVals': ['m', 'f'],
+        'colVals': ['0', '1', '2'],
+        'cellVal': '2',
+    }
+    */
+    if (params.changeState == true) {
+        allocation = params.allocation;
+        rowVals = params.rowVals;
+        colVals = params.colVals;
+        cellVal = params.cellVal;
+        translation = params.translation || [0.0, 0.0, 0.0]; // x, y, z
+        scale = params.scale || 1.0;
+        updateController(params);
+        removeCanvas();
+        if (!params.image) {
+            if(storyNum > 0){ draw(); }
+        } else {
+            if(storyNum > 0){ drawImage(params.image, params.imageScale); };
+        }
+    }
+}
+
+function genCategoryColorAndDesc() {
+    var divCategories = document.getElementById('categories');
+
+    for (var i = 0; i < colors.length - 1; i++) { // last color is black
+        var divCategory = document.createElement('div');
+        var divColor = document.createElement('div');
+        var divDesc = document.createElement('div');
+        var text = document.createTextNode(categories[i]);
+        divCategory.className = 'category';
+        divColor.className = 'category-color';
+        divColor.style.backgroundColor = colors[i];
+        divDesc.className = 'category-desc';
+        divDesc.appendChild(text);
+        divCategory.appendChild(divColor);
+        divCategory.appendChild(divDesc);
+        divCategories.appendChild(divCategory);
+    }
+}
+
+function removeSaveOptionsFromGui() {
+    document.getElementsByClassName('save-row')[0].remove();
+}
+
+function moveGuiPosition() {
+    var guiDiv = document.getElementsByClassName('dg ac')[0]
+    console.log(guiDiv);
+    var wrapperDiv = document.getElementById('wrapper');
+    console.log(wrapperDiv);
+    wrapperDiv.appendChild(guiDiv);
+}
+
+// for showing stroies
+function createExplanationArea() {
+    var explanationArea = document.createElement('div');
+    document.getElementById("wrapper").appendChild(explanationArea);
+
+    explanationArea.id = 'explanation-area';
+}
+
+function placeTextInExplanationArea(text) {
+    var explanationArea = document.getElementById('explanation-area');
+
+    while (explanationArea.childNodes[0]) {
+        if (explanationArea.childNodes[0]) {
+            explanationArea.childNodes[0].remove();
+        }
+    }
+
+    if (text != '') {
+        var textLines = text.split('\n');
+        for (var i = 0; i < textLines.length; i++) {
+            var pNode = document.createElement('p');
+            // make space for continuous newlines i.e., \n\n
+            if (textLines[i] == '') {
+                pNode.style.height = '1em';
+            }
+
+            var textNode = document.createTextNode(textLines[i]);
+            pNode.appendChild(textNode);
+            explanationArea.appendChild(pNode);
+        }
+
+        var left = document.getElementById("wrapper").clientWidth / 2 - explanationArea.clientWidth / 2;
+        var top = document.getElementById("wrapper").clientHeight / 2 - explanationArea.clientHeight / 2;
+        explanationArea.style.left = left.toString() + 'px';
+        explanationArea.style.top = top.toString() + 'px';
+        explanationArea.style.backgroundColor = 'rgba(160, 160, 160, 0.3)';
+    } else {
+        // for no text, using alpha = 0
+        explanationArea.style.backgroundColor = 'rgba(160, 160, 160, 0.0)';
+    }
+}
+
+function removeExplanationArea() {
+    var explanationArea = document.getElementById('explanation-area');
+    explanationArea.remove();
+}
+
+function connectEvent(eventType) {
+    eventType = eventType || 'click'; // default parameter is click
+    document.getElementById('wrapper').addEventListener(eventType, goNextStory);
+}
+
+function disconnectEvent(eventType) {
+    eventType = eventType || 'click'; // default parameter is click
+    document.getElementById('wrapper').removeEventListener(eventType, goNextStory);
+}
+
+function goNextStory() {
+    storyNum++;
+    if (storyNum < stories.length) {
+        updateParams(params[storyNum], storyNum);
+        placeTextInExplanationArea(stories[storyNum]);
+    } else {
+        removeExplanationArea();
+        disconnectEvent();
+    }
+}
+
+function goPrevStory() {
+    storyNum--;
+    if (storyNum < 0) {
+        storyNum = 0;
+    }
+    if (storyNum < stories.length) {
+        updateParams(params[storyNum], storyNum);
+        placeTextInExplanationArea(stories[storyNum]);
+    }
+}
+
+function initStory() {
+    storyNum = 0;
+    updateParams(params[storyNum], storyNum);
+    createExplanationArea();
+    placeTextInExplanationArea(stories[storyNum]);
+    connectEvent();
+}
+
+</script>
+</head>
+<body>
+    <section id='scroll2'>
+		<div class='scroll__text2'>
+			<div class='step2' data-step='1'>
+				<div class="text">
+					<h1>Diseases — like Ischaemic heart disease and stroke* are the leading causes of death in the world. Could we have prevented this? </h1>
+					<span id="reference">[*]http://www.who.int/gho/mortality_burden_disease/causes_death/top_10/en/</span>
+				</div>
+			</div>
+			<div class='step2' data-step='2'>
+				<div class="sm-text">
+					<p> <span id='bold'> Reasonably so.</span> Doctors and reseachers have pointed out that lifestyle and environmental changes significantly reduce the likelihood of such diseases. But what people may not be quite aware of is the progression of certain diseases and how strongly and positively associated they are to other diseases.</p>
+					</div>
+			</div>
+			<div class='step2' data-step='3'>
+				<div class="sm-text">
+						<p id="small">This is PLASMA: a visualization of diseases that is grouped by age, sex, and disease categories classified by ICD-9.*</p> 
+						
+						<p id="small">With PLASMA, we will share stories about the progression of certain diseases and illustrate the likelihood of contracting certain diseases.</p>
+						<span id="reference" style="padding-left: 16px;">[*]http://icd9cm.chrisendres.com/</span>
+					</div>
+			</div>
+		</div>
+	</section>
+
+	<section id='scroll'>
+		<div class='scroll__graphic'>
+			<p>0</p>
+		</div>
+		<div class='scroll__text'>
+			<div class='step' data-step='1'>
+				<p>STEP 1</p>
+			</div>
+			<div class='step' data-step='2'>
+				<p>STEP 2</p>
+			</div>
+			<div class='step' data-step='3'>
+				<p>STEP 3</p>
+			</div>
+			<div class='step' data-step='4'>
+				<p>STEP 4</p>
+			</div>
+		</div>
+	</section>
+
+    <script type="text/javascript" src="./js/scrollama.min.js"></script>
+    <script type="text/javascript" src="./js/scrollama-basic.js"></script>
+    <script type="text/javascript" src="./js/scrollama-sticky.js"></script>
+    <script type="text/javascript" src="./js/guiController.js"></script>
+
+    <div id="wrapper">
+        <div id="header">
+            <h1 id="title">Diseases are beautiful.... (title)</h1>
+        </div>
+        <div id="contents">
+            <div id="contents-top">
+                <div id="cell-label-area"></div>
             </div>
+            <div id="contents-left">
+                <div id="row-blank-area"></div>
+                <div id="row-label-area"></div>
             </div>
-
-
-
-
-      <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.js"></script>
-      <script src="js/app.js"></script>
-      <script src="js/services.js"></script>
-      <script src="js/controllers.js"></script>
-      <script src="js/directives.js"></script>
-
- 
-
+            <div id="contents-center">
+                <div id="col-label-area"></div>
+                <div id="canvas"></div>
+            </div>
+            <div id="contents-right">
+                <div id="legend-area">
+                    <div class="legend">
+                        <div class="legend-title">Color</div>
+                        <div class="legend-desc">a category of the disease</div>
+                        <div id="categories">
+                            <script>genCategoryColorAndDesc();</script>
+                        </div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-title">Center circle size</div>
+                        <div class="legend-desc">the number of diseases that have a positive association from the category placed at center</div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-title">Distance from the center circle</div>
+                        <div class="legend-desc">strength of positive association</div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-title">Width of lightning</div>
+                        <div class="legend-desc">a number of diseases that have stronger positive association at that point</div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-title">Fluctuation of lightning</div>
+                        <div class="legend-desc">variation of strength of positive associaton</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <a href="http://associations.phr.tmu.edu.tw">About the data</a>
+        </div>
+    </div>
+    <script>
+        removeSaveOptionsFromGui();
+        moveGuiPosition();
+        initStory();
+    </script>
 </body>
-
-
 </html>
